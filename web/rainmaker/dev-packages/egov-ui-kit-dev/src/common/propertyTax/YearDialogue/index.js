@@ -8,6 +8,7 @@ import { resetFormWizard } from "egov-ui-kit/utils/PTCommon";
 import Label from "egov-ui-kit/utils/translationNode";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { getCurrentFinancialYear } from "../../../utils/PTCommon";
 import RadioButtonForm from "./components/RadioButtonForm";
 import "./index.css";
 
@@ -76,6 +77,7 @@ class YearDialog extends Component {
 
   render() {
     let { open, closeDialogue, getYearList, history, form, removeForm, urlToAppend, reset_property_reset } = this.props;
+    getYearList = !!getYearList.length ? getYearList : [getCurrentFinancialYear()]
     return getYearList ? (
       <Dialog
         open={open}

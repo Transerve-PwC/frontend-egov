@@ -296,6 +296,7 @@ class Property extends Component {
       documentsUploaded,
       loading
     } = this.props;
+    const {channel} = latestPropertyDetails || {}
     const { closeYearRangeDialogue } = this;
     const { dialogueOpen, urlToAppend, showAssessmentHistory } = this.state;
     let urlArray = [];
@@ -329,7 +330,7 @@ class Property extends Component {
         <div id="tax-wizard-buttons" className="wizard-footer col-sm-12" style={{ textAlign: "right" }}>
           <div className="button-container col-xs-4 property-info-access-btn" style={{ float: "right" }}>
 
-            <Button
+            {channel !== "MIGRATION" && (<Button
               label={
                 <Label buttonLabel={true}
                   label={formWizardConstants[PROPERTY_FORM_PURPOSE.UPDATE].parentButton} fontSize="16px"
@@ -339,7 +340,7 @@ class Property extends Component {
               labelStyle={{ letterSpacing: 0.7, padding: 0, color: "#fe7a51" }}
               buttonStyle={{ border: "1px solid #fe7a51" }}
               style={{ lineHeight: "auto", minWidth: "45%", marginRight: "10%" }}
-            />
+            />)}
             <Button
               onClick={() => this.onAssessPayClick()}
               label={<Label buttonLabel={true} label={formWizardConstants[PROPERTY_FORM_PURPOSE.ASSESS].parentButton} fontSize="16px" />}

@@ -245,7 +245,7 @@ class PTHome extends Component {
             </div>
           }
         /> */}
-        <div style={{ padding: "0px 8px" }}>
+        {/* <div style={{ padding: "0px 8px" }}>
           <Card
             className="property-tax-card"
             textChildren={
@@ -263,7 +263,7 @@ class PTHome extends Component {
               />
             }
           />
-        </div>
+        </div> */}
       </Screen>
     );
   }
