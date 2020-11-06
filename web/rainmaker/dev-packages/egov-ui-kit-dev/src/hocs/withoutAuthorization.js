@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 // import AppBar from "@material-ui/core/AppBar";
 import "./index.css";
 import { getLocale, getTenantId, getUserInfo } from "egov-ui-kit/utils/localStorageUtils";
-import digitLogo from "egov-ui-kit/assets/images/Digit_logo.png";
+import digitLogo from "egov-ui-kit/assets/images/UPGovernment.png";
 import Label from "egov-ui-kit/utils/translationNode";
 import { isPublicSearch } from "egov-ui-framework/ui-utils/commons";
 import get from "lodash/get";
@@ -12,6 +12,7 @@ import { DropDown, AppBar } from "components";
 import { getQueryArg } from "egov-ui-kit/utils/commons";
 import Toolbar from "material-ui/Toolbar";
 import msevaLogo from "egov-ui-kit/assets/images/mseva-punjab.png";
+import citizenLogo from "egov-ui-kit/assets/images/RCEUS.png";
 
 const getUlbGradeLabel = (ulbGrade) => {
   if (ulbGrade) {
@@ -174,7 +175,7 @@ const withoutAuthorization = (redirectionUrl) => (Component) => {
     const ulbGrade = userTenant && get(userTenant[0], "city.ulbGrade");
     const ulbName = userTenant && get(userTenant[0], "code");
     const defaultTitle = ulbGrade && getUlbGradeLabel(ulbGrade);
-    const ulbLogo = isPublicSearch() ? msevaLogo : (userTenant.length > 0 ? get(userTenant[0], "logoId") : "https://egov.transerve.com/media/pblogo.png");
+    const ulbLogo = process.env.REACT_APP_NAME === "Citizen" ? citizenLogo : isPublicSearch() ? msevaLogo : (userTenant.length > 0 ? get(userTenant[0], "logoId") : "https://egov.transerve.com/media/pblogo.png");
     if (stateInfoById && stateInfoById.length > 0) {
       hasLocalisation = stateInfoById[0].hasLocalisation;
       defaultUrl = stateInfoById[0].defaultUrl;

@@ -77,7 +77,7 @@ class YearDialog extends Component {
 
   render() {
     let { open, closeDialogue, getYearList, history, form, removeForm, urlToAppend, reset_property_reset } = this.props;
-    getYearList = !!getYearList.length ? getYearList : [getCurrentFinancialYear()]
+    getYearList = !!getYearList && !!getYearList.length ? getYearList : [getCurrentFinancialYear()]
     return getYearList ? (
       <Dialog
         open={open}

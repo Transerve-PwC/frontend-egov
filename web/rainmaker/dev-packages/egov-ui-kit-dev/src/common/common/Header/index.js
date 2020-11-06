@@ -12,6 +12,7 @@ import get from "lodash/get";
 import "./index.css";
 import { updateActiveRoute } from "egov-ui-kit/redux/app/actions";
 import { getTenantId, getUserInfo, localStorageGet } from "egov-ui-kit/utils/localStorageUtils";
+import citizenLogo from "egov-ui-kit/assets/images/RCEUS.png";
 
 // get userInfo role
 class Header extends Component {
@@ -164,7 +165,7 @@ class Header extends Component {
     } = this.props;
     const tenantId = role.toLowerCase() === "citizen" ? userInfo.permanentCity : getTenantId();
     const currentCity = cities.filter((item) => item.code === tenantId);
-    const ulbLogo =
+    const ulbLogo = process.env.REACT_APP_NAME === "Citizen" ? citizenLogo :
       currentCity.length > 0 ? get(currentCity[0], "logoId") : "https://egov.transerve.com/media/pblogo.png";
     return (
       <div style={headerStyle}>
