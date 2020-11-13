@@ -110,13 +110,13 @@ class ReviewForm extends Component {
             </div>
           }
         />
-        {!this.props.isCompletePayment && (
+        {/* {!this.props.isCompletePayment && (
           <CalculationDetails
             open={this.state.calculationDetails}
             data={this.props.calculationScreenData}
             closeDialogue={() => this.closeCalculationDetails()}
           />
-        )}
+        )} */}
         <div className="pt-rebate-exemption-box">
           <Dialog
             open={showRebateBox}

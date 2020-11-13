@@ -62,7 +62,7 @@ class FormWizard extends Component {
     isFullPayment: true,
     valueSelected: "Full_Amount",
     nextButtonEnabled: true,
-    calculationScreenData: [],
+    // calculationScreenData: [],
     assessedPropertyDetails: {},
     imageUrl: '',
     purpose: PROPERTY_FORM_PURPOSE.DEFAULT,
@@ -553,7 +553,7 @@ class FormWizard extends Component {
               location={this.props.location}
               totalAmount={totalAmountToBePaid}
               isCompletePayment={isCompletePayment}
-              calculationScreenData={this.state.calculationScreenData}
+              // calculationScreenData={this.state.calculationScreenData}
               getEstimates={this.getEstimates}
             />
           </div>
@@ -1311,12 +1311,12 @@ class FormWizard extends Component {
         //For calculation screen
         const tenantId =
           prepareFormData.Properties[0] && prepareFormData.Properties[0].tenantId;
-        const calculationScreenData = await getCalculationScreenData(
-          get(estimateResponse, "Calculation[0].billingSlabIds", []),
-          tenantId,
-          this
-        );
-        this.setState({ calculationScreenData: calculationScreenData.data });
+        // const calculationScreenData = await getCalculationScreenData(
+        //   get(estimateResponse, "Calculation[0].billingSlabIds", []) || [],
+        //   tenantId,
+        //   this
+        // );
+        // this.setState({ calculationScreenData: calculationScreenData.data });
         estimateResponse = getSortedTaxSlab(estimateResponse);
         hideSpinner();
         return estimateResponse;
