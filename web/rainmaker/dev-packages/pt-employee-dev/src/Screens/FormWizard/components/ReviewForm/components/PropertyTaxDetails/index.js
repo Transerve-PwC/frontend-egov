@@ -178,7 +178,8 @@ class PropertyTaxDetails extends React.Component {
                     () => addRebateBox(true)
                   }
                 />
-              </div> <div
+              </div> 
+              {/* <div
                 style={{ padding: 0 }}
                 className="col-sm-4 view-detail-button"
                 
@@ -203,7 +204,7 @@ class PropertyTaxDetails extends React.Component {
                     openCalculationDetails();
                   }}
                 />
-                {/* <div className="flex-child">
+                <div className="flex-child">
                   <Button
                     label={
                       <Label
@@ -218,9 +219,9 @@ class PropertyTaxDetails extends React.Component {
                     }}
                     onClick={() => addRebateBox(true)}
                   />
-                  </div> */}
-              </div>
-            </div>
+                  </div>
+              </div>*/}
+            </div> 
             <div className="col-sm-6" style={{ backgroundColor: 'white' }}>
               <div className="date-details">
                 <Label

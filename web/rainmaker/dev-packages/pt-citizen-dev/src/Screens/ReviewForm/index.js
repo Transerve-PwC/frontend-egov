@@ -249,13 +249,13 @@ class ReviewForm extends Component {
               <OwnerInfo OldProperty={OldProperty} generalMDMSDataById={generalMDMSDataById} properties={this.props.properties} editIcon={formWizardConstants[purpose].canEditOwner ? <EditIcon onIconClick={() => onEditButtonClick(2)} /> : null}></OwnerInfo>
               <DocumentsInfo generalMDMSDataById={generalMDMSDataById} documentsUploaded={this.props.documentsUploadRedux} editIcon={formWizardConstants[purpose].isEditButton ? <EditIcon onIconClick={() => onEditButtonClick(3)} /> : null}></DocumentsInfo>
               <div>
-                {!this.props.isCompletePayment && (
+                {/* {!this.props.isCompletePayment && (
                   <CalculationDetails
                     open={this.state.calculationDetails}
                     data={this.props.calculationScreenData}
                     closeDialogue={() => this.closeCalculationDetails()}
                   />
-                )}
+                )} */}
                 <p className="declaration-main-header">DECLARATION</p>
                 <SingleCheckbox
                   id="rcpt"

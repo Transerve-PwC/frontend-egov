@@ -59,7 +59,7 @@ class FormWizard extends Component {
     propertyUUId: "",
     termsAccepted: false,
     termsError: "",
-    calculationScreenData: [],
+    // calculationScreenData: [],
     assessedPropertyDetails: {},
     purpose: PROPERTY_FORM_PURPOSE.DEFAULT,
     isAssesment: false,
@@ -531,7 +531,7 @@ class FormWizard extends Component {
             toggleTerms={toggleTerms}
             termsAccepted={termsAccepted}
             termsError={termsError}
-            calculationScreenData={this.state.calculationScreenData}
+            // calculationScreenData={this.state.calculationScreenData}
             getEstimates={this.getEstimates}
           />
         </div>)
@@ -566,7 +566,7 @@ class FormWizard extends Component {
                   ""
                 ).toLowerCase() === "vacant"
               }
-              calculationScreenData={this.state.calculationScreenData}
+              // calculationScreenData={this.state.calculationScreenData}
             />
           </div>
         );
@@ -1205,12 +1205,12 @@ class FormWizard extends Component {
         //For calculation screen
         const tenantId =
           prepareFormData.Properties[0] && prepareFormData.Properties[0].tenantId;
-        const calculationScreenData = await getCalculationScreenData(
-          get(estimateResponse, "Calculation[0].billingSlabIds", []),
-          tenantId,
-          this
-        );
-        this.setState({ calculationScreenData: calculationScreenData.data });
+        // const calculationScreenData = await getCalculationScreenData(
+        //   get(estimateResponse, "Calculation[0].billingSlabIds", []),
+        //   tenantId,
+        //   this
+        // );
+        // this.setState({ calculationScreenData: calculationScreenData.data });
         estimateResponse = getSortedTaxSlab(estimateResponse);
         hideSpinner();
         return estimateResponse;

@@ -213,13 +213,13 @@ class PaymentForm extends Component {
                 openCalculationDetails={this.openCalculationDetails}
                 optionSelected={valueSelected}
               />
-              {!this.props.isCompletePayment && (
+              {/* {!this.props.isCompletePayment && (
                 <CalculationDetails
                   open={this.state.calculationDetails}
                   data={this.props.calculationScreenData}
                   closeDialogue={() => this.closeCalculationDetails()}
                 />
-              )}
+              )} */}
               {!isPartialPaymentInValid && (
                 <PaymentAmountDetails
                   value={

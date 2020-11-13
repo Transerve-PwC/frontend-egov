@@ -189,7 +189,7 @@ class PropertyTaxDetails extends React.Component {
                   />
                 </div>
               </div>
-              <div className="col-xs-12 calculation-button">
+              {/* <div className="col-xs-12 calculation-button">
                 <FlatButton
                   label={
                     <Label
@@ -210,7 +210,7 @@ class PropertyTaxDetails extends React.Component {
                     openCalculationDetails();
                   }}
                 />
-              </div>
+              </div> */}
             </div>
             <div className="col-sm-6" style={{ backgroundColor: 'white' }}>
 
