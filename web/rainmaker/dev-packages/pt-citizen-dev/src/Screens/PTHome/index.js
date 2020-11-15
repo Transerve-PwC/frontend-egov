@@ -123,24 +123,24 @@ class PTHome extends Component {
           </div>
         )
       }, */
-      {
-        primaryText: <Label label="PT_HOW_IT_WORKS" labelStyle={labelStyle} />,
-        route: "/property-tax/how-it-works",
-        rightIcon: (
-          <div style={listIconStyle}>
-            <Icon action="hardware" name="keyboard-arrow-right" />
-          </div>
-        )
-      },
-      {
-        primaryText: <Label label="PT_EXAMPLE" labelStyle={labelStyle} />,
-        route: "/property-tax/pt-examples",
-        rightIcon: (
-          <div style={listIconStyle}>
-            <Icon action="hardware" name="keyboard-arrow-right" />
-          </div>
-        )
-      }
+      // {
+      //   primaryText: <Label label="PT_HOW_IT_WORKS" labelStyle={labelStyle} />,
+      //   route: "/property-tax/how-it-works",
+      //   rightIcon: (
+      //     <div style={listIconStyle}>
+      //       <Icon action="hardware" name="keyboard-arrow-right" />
+      //     </div>
+      //   )
+      // },
+      // {
+      //   primaryText: <Label label="PT_EXAMPLE" labelStyle={labelStyle} />,
+      //   route: "/property-tax/pt-examples",
+      //   rightIcon: (
+      //     <div style={listIconStyle}>
+      //       <Icon action="hardware" name="keyboard-arrow-right" />
+      //     </div>
+      //   )
+      // }
     ];
   };
 
@@ -245,7 +245,7 @@ class PTHome extends Component {
             </div>
           }
         /> */}
-        {/* <div style={{ padding: "0px 8px" }}>
+        <div style={{ padding: "0px 8px" }}>
           <Card
             className="property-tax-card"
             textChildren={
@@ -263,7 +263,7 @@ class PTHome extends Component {
               />
             }
           />
-        </div> */}
+        </div>
       </Screen>
     );
   }
