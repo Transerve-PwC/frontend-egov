@@ -6,6 +6,7 @@ import { getTenantId } from "egov-ui-kit/utils/localStorageUtils";
 import "./index.css";
 import { resetFields } from "./mutation-methods";
 import propertySearchTabs from "./property-search-tabs";
+import { startApplyFlow } from "./requiredDocuments/footer";
 import { searchApplicationTable, searchPropertyTable } from "./searchResource/searchResults";
 const hasButton = getQueryArg(window.location.href, "hasButton");
 let enableButton = true;
@@ -164,10 +165,7 @@ const screenConfig = {
               },
               onClickDefination: {
                 action: "condition",
-                callBack: (state, dispatch) => {
-                  showHideAdhocPopup(state, dispatch, "propertySearch");
-
-                }
+                callBack: startApplyFlow
               },
               // roleDefination: {
               //   rolePath: "user-info.roles",
