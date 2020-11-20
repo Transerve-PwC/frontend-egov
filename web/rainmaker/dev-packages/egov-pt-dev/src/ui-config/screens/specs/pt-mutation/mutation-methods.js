@@ -208,6 +208,57 @@ export const searchPropertyDetails = getCommonCard({
       pattern: /^[a-zA-Z0-9-]*$/i,
       errorMessage: "ERR_INVALID_PROPERTY_ID",
       jsonPath: "searchScreen.oldpropertyids"
+    }),
+    ownerName: getTextField({
+      label: {
+        labelName: "Owner Name",
+        labelKey: "PT_OWNER_NAME_LABEL"
+      },
+      placeholder: {
+        labelName: "Enter Owner Name",
+        labelKey: "PT_OWNER_NAME_PLACEHOLDER"
+      },
+      gridDefination: {
+        xs: 12,
+        sm: 4,
+
+      },
+      required: false,
+      jsonPath: "searchScreen.name"
+    }),
+    streetName: getTextField({
+      label: {
+        labelName: "Street Name",
+        labelKey: "PT_STREET_NAME_LABEL"
+      },
+      placeholder: {
+        labelName: "Enter Street Name",
+        labelKey: "PT_STREET_NAME_PLACEHOLDER"
+      },
+      gridDefination: {
+        xs: 12,
+        sm: 4,
+
+      },
+      required: false,
+      jsonPath: "searchScreen.locality"
+    }),
+    houseNumber: getTextField({
+      label: {
+        labelName: "House No.",
+        labelKey: "PT_HOUSE_NUMBER_LABEL"
+      },
+      placeholder: {
+        labelName: "Enter House No.",
+        labelKey: "PT_HOUSE_NUMBER_PLACEHOLDER"
+      },
+      gridDefination: {
+        xs: 12,
+        sm: 4,
+
+      },
+      required: false,
+      jsonPath: "searchScreen.doorno"
     })
   }),
   button: getCommonContainer({

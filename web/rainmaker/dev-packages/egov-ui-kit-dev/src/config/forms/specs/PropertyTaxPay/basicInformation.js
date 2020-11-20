@@ -82,7 +82,8 @@ const formConfig = {
     rainwaterHarvesting: {
       id: "rainwaterHarvesting",
       jsonPath: "Properties[0].additionalDetails.isRainwaterHarvesting",
-      type: "radioButton",
+      type: "checkbox",
+      value: "",
       localePrefix: "PROPERTYTAX_BILLING_SLAB",
       floatingLabelText: "PT_COMMONS_IS_RAINWATER_HARVESTING",
       hintText: "PT_COMMONS_IS_RAINWATER_HARVESTING",
@@ -92,9 +93,161 @@ const formConfig = {
       labelsFromLocalisation:false,
       gridDefination: {
         xs: 12,
-        sm: 6
+        sm: 12
       },
       dropDownData: [],
+    },
+    solidWasteManagement: {
+      id: "solidWasteManagement",
+      jsonPath: "Properties[0].additionalDetails.hasSolidWasteManagementSystem",
+      type: "checkbox",
+      localePrefix: "PROPERTYTAX_BILLING_SLAB",
+      floatingLabelText: "PT_COMMONS_HAS_SOLID_WASTE_MANAGEMENT_SYSTEM",
+      hintText: "PT_COMMONS_HAS_SOLID_WASTE_MANAGEMENT_SYSTEM",
+      required: false,
+      fullWidth: true,
+      showFloatingLabelText:true,
+      labelsFromLocalisation:false,
+      gridDefination: {
+        xs: 12,
+        sm: 12
+      },
+      dropDownData: [],
+    },
+    solarPanels: {
+      id: "solarPanales",
+      jsonPath: "Properties[0].additionalDetails.hasSolarPanels",
+      type: "checkbox",
+      localePrefix: "PROPERTYTAX_BILLING_SLAB",
+      floatingLabelText: "PT_COMMONS_HAS_SOLAR_PANELS",
+      hintText: "PT_COMMONS_HAS_SOLAR_PANELS",
+      required: false,
+      fullWidth: true,
+      showFloatingLabelText:true,
+      labelsFromLocalisation:false,
+      gridDefination: {
+        xs: 12,
+        sm: 12
+      },
+      dropDownData: [],
+    },
+    openSpace: {
+      id: "openSpace",
+      jsonPath: "Properties[0].additionalDetails.hasOpenSpace",
+      type: "checkbox",
+      localePrefix: "PROPERTYTAX_BILLING_SLAB",
+      floatingLabelText: "PT_COMMONS_HAS_OPEN_SPACE",
+      hintText: "PT_COMMONS_HAS_OPEN_SPACE",
+      required: false,
+      fullWidth: true,
+      showFloatingLabelText:true,
+      labelsFromLocalisation:false,
+      gridDefination: {
+        xs: 12,
+        sm: 12
+      },
+      dropDownData: [],
+    },
+    antiPollutionMeasures: {
+      id: "solidWasteManagement",
+      jsonPath: "Properties[0].additionalDetails.hasAntiPollutionMeasures",
+      type: "checkbox",
+      localePrefix: "PROPERTYTAX_BILLING_SLAB",
+      floatingLabelText: "PT_COMMONS_HAS_ANTIPOLLUTION_MEASURES",
+      hintText: "PT_COMMONS_HAS_ANTIPOLLUTION_MEASURES",
+      required: false,
+      fullWidth: true,
+      showFloatingLabelText:true,
+      labelsFromLocalisation:false,
+      gridDefination: {
+        xs: 12,
+        sm: 12
+      },
+      dropDownData: [],
+    },
+    liftFacility: {
+      id: "liftFacility",
+      jsonPath: "Properties[0].additionalDetails.hasLiftFacility",
+      type: "checkbox",
+      localePrefix: "PROPERTYTAX_BILLING_SLAB",
+      floatingLabelText: "PT_COMMONS_HAS_LIFT_FACILITY",
+      hintText: "PT_COMMONS_HAS_LIFT_FACILITY",
+      required: false,
+      fullWidth: true,
+      showFloatingLabelText:true,
+      labelsFromLocalisation:false,
+      gridDefination: {
+        xs: 12,
+        sm: 12
+      },
+      dropDownData: [],
+    },
+    powerBackUp: {
+      id: "powerBackUp",
+      jsonPath: "Properties[0].additionalDetails.hasPowerBackUp",
+      type: "checkbox",
+      localePrefix: "PROPERTYTAX_BILLING_SLAB",
+      floatingLabelText: "PT_COMMONS_HAS_POWER_BACKUP",
+      hintText: "PT_COMMONS_HAS_POWER_BACKUP",
+      required: false,
+      fullWidth: true,
+      showFloatingLabelText:true,
+      labelsFromLocalisation:false,
+      gridDefination: {
+        xs: 12,
+        sm: 12
+      },
+      dropDownData: [],
+    },
+    parking: {
+      id: "parking",
+      jsonPath: "Properties[0].additionalDetails.hasParking",
+      type: "checkbox",
+      localePrefix: "PROPERTYTAX_BILLING_SLAB",
+      floatingLabelText: "PT_COMMONS_HAS_PARKING",
+      hintText: "PT_COMMONS_HAS_PARKING",
+      required: false,
+      fullWidth: true,
+      showFloatingLabelText:true,
+      labelsFromLocalisation:false,
+      gridDefination: {
+        xs: 12,
+        sm: 12
+      },
+      dropDownData: [],
+    },
+    fireFighting: {
+      id: "fireFighting",
+      jsonPath: "Properties[0].additionalDetails.hasFireFighting",
+      type: "checkbox",
+      localePrefix: "PROPERTYTAX_BILLING_SLAB",
+      floatingLabelText: "PT_COMMONS_HAS_FIRE_FIGHTING",
+      hintText: "PT_COMMONS_HAS_FIRE_FIGHTING",
+      required: false,
+      fullWidth: true,
+      showFloatingLabelText:true,
+      labelsFromLocalisation:false,
+      gridDefination: {
+        xs: 12,
+        sm: 12
+      },
+      dropDownData: [],
+    },
+    plantation: {
+      id: "plantation",
+      jsonPath: "Properties[0].additionalDetails.hasPlantation",
+      type: "checkbox",
+      localePrefix: "PROPERTYTAX_BILLING_SLAB",
+      floatingLabelText: "PT_COMMONS_HAS_PLANTATION",
+      hintText: "PT_COMMONS_HAS_PLANTATION",
+      required: false,
+      fullWidth: true,
+      showFloatingLabelText:true,
+      labelsFromLocalisation:false,
+      gridDefination: {
+        xs: 12,
+        sm: 12
+      },
     },
   },
   action: "",
@@ -113,9 +266,6 @@ const formConfig = {
       masterOne = Object.values(get(state, "common.generalMDMSDataById.PropertyType")).filter(item=> item.propertyType !== "BUILTUP");
       masterTwo = get(state, "common.generalMDMSDataById.PropertySubType");
       set(action, "form.fields.typeOfBuilding.dropDownData", mergeMaster(masterOne, masterTwo, "propertyType"));
-      set(action, "form.fields.rainwaterHarvesting.options",options);
-      set(action, "form.fields.rainwaterHarvesting.value", get(state.common.prepareFormData,'Properties[0].additionalDetails.isRainwaterHarvesting',false));
-      
       return action;
     } catch (e) {
       console.log(e);

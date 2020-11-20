@@ -57,6 +57,33 @@ export const getPlotSizeInfo = (propertyDetails) => {
 export const getRainWaterHarvestingInfo = (properties) => {
   return get(properties, 'additionalDetails.isRainwaterHarvesting', false) ? getTranslatedLabel("PT_COMMON_YES", localizationLabelsData) : getTranslatedLabel("PT_COMMON_NO", localizationLabelsData)
 }
+export const getSolidWasteManagement = (properties) => {
+  return get(properties, 'additionalDetails.hasSolidWasteManagementSystem', false) ? getTranslatedLabel("PT_COMMON_YES", localizationLabelsData) : getTranslatedLabel("PT_COMMON_NO", localizationLabelsData)
+}
+export const getSolarPanel = (properties) => {
+  return get(properties, 'additionalDetails.hasSolarPanels', false) ? getTranslatedLabel("PT_COMMON_YES", localizationLabelsData) : getTranslatedLabel("PT_COMMON_NO", localizationLabelsData)
+}
+export const getOpenSpace = (properties) => {
+  return get(properties, 'additionalDetails.hasOpenSpace', false) ? getTranslatedLabel("PT_COMMON_YES", localizationLabelsData) : getTranslatedLabel("PT_COMMON_NO", localizationLabelsData)
+}
+export const getAntiPollutionMeasures = (properties) => {
+  return get(properties, 'additionalDetails.hasAntiPollutionMeasures', false) ? getTranslatedLabel("PT_COMMON_YES", localizationLabelsData) : getTranslatedLabel("PT_COMMON_NO", localizationLabelsData)
+}
+export const getLiftFacility = (properties) => {
+  return get(properties, 'additionalDetails.hasLiftFacility', false) ? getTranslatedLabel("PT_COMMON_YES", localizationLabelsData) : getTranslatedLabel("PT_COMMON_NO", localizationLabelsData)
+}
+export const getPowerBackup = (properties) => {
+  return get(properties, 'additionalDetails.hasPowerBackUp', false) ? getTranslatedLabel("PT_COMMON_YES", localizationLabelsData) : getTranslatedLabel("PT_COMMON_NO", localizationLabelsData)
+}
+export const getParking = (properties) => {
+  return get(properties, 'additionalDetails.hasParking', false) ? getTranslatedLabel("PT_COMMON_YES", localizationLabelsData) : getTranslatedLabel("PT_COMMON_NO", localizationLabelsData)
+}
+export const getFireFighting = (properties) => {
+  return get(properties, 'additionalDetails.hasFireFighting', false) ? getTranslatedLabel("PT_COMMON_YES", localizationLabelsData) : getTranslatedLabel("PT_COMMON_NO", localizationLabelsData)
+}
+export const getPlantation = (properties) => {
+  return get(properties, 'additionalDetails.hasPlantation', false) ? getTranslatedLabel("PT_COMMON_YES", localizationLabelsData) : getTranslatedLabel("PT_COMMON_NO", localizationLabelsData)
+}
 
 export const getUnitUsageTypeInfo = (unit, propertyDetails) => {
   return unit && unit.usageCategoryMinor ? getTranslatedLabel('PROPERTYTAX_BILLING_SLAB_' + unit && unit.usageCategoryMinor, localizationLabelsData) : (propertyDetails && propertyDetails.usageCategoryMinor ? getTranslatedLabel('PROPERTYTAX_BILLING_SLAB_' + propertyDetails && propertyDetails.usageCategoryMinor, localizationLabelsData) :
@@ -103,6 +130,51 @@ export const getAssessmentInfo = (propertyDetails, generalMDMSDataById, properti
         value: getRainWaterHarvestingInfo(properties),
         oldValue: OldProperty && getRainWaterHarvestingInfo(OldProperty),
       },
+      {
+        key: getTranslatedLabel("PT_COMMONS_HAS_SOLID_WASTE_MANAGEMENT_SYSTEM", localizationLabelsData),
+        value: getSolidWasteManagement(properties),
+        oldValue: OldProperty && getSolidWasteManagement(OldProperty)
+      },
+      {
+        key: getTranslatedLabel("PT_COMMONS_HAS_SOLAR_PANELS", localizationLabelsData),
+        value: getSolarPanel(properties),
+        oldValue: OldProperty && getSolarPanel(OldProperty)
+      },
+      {
+        key: getTranslatedLabel("PT_COMMONS_HAS_OPEN_SPACE", localizationLabelsData),
+        value: getOpenSpace(properties),
+        oldValue: OldProperty && getOpenSpace(OldProperty)
+      },
+      {
+        key: getTranslatedLabel("PT_COMMONS_HAS_ANTIPOLLUTION_MEASURES", localizationLabelsData),
+        value: getAntiPollutionMeasures(properties),
+        oldValue: OldProperty && getAntiPollutionMeasures(OldProperty)
+      },
+      {
+        key: getTranslatedLabel("PT_COMMONS_HAS_LIFT_FACILITY", localizationLabelsData),
+        value: getLiftFacility(properties),
+        oldValue: OldProperty && getLiftFacility(OldProperty)
+      },
+      {
+        key: getTranslatedLabel("PT_COMMONS_HAS_POWER_BACKUP", localizationLabelsData),
+        value: getPowerBackup(properties),
+        oldValue: OldProperty && getPowerBackup(OldProperty)
+      },
+      {
+        key: getTranslatedLabel("PT_COMMONS_HAS_PARKING", localizationLabelsData),
+        value: getParking(properties),
+        oldValue: OldProperty && getParking(OldProperty)
+      },
+      {
+        key: getTranslatedLabel("PT_COMMONS_HAS_FIRE_FIGHTING", localizationLabelsData),
+        value: getFireFighting(properties),
+        oldValue: OldProperty && getFireFighting(OldProperty)
+      },
+      {
+        key: getTranslatedLabel("PT_COMMONS_HAS_PLANTATION", localizationLabelsData),
+        value: getPlantation(properties),
+        oldValue: OldProperty && getPlantation(OldProperty)
+      }
     ]
   );
 };

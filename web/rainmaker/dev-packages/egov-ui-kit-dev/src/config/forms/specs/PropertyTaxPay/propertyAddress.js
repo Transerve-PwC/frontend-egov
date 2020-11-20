@@ -1,4 +1,4 @@
-import { mohalla } from "egov-ui-kit/config/forms/specs/PropertyTaxPay/utils/reusableFields";
+import { mohalla, ward, zone } from "egov-ui-kit/config/forms/specs/PropertyTaxPay/utils/reusableFields";
 import { fetchLocalizationLabel } from "egov-ui-kit/redux/app/actions";
 import { fetchGeneralMDMSData, prepareFormData } from "egov-ui-kit/redux/common/actions";
 import { setFieldProperty } from "egov-ui-kit/redux/form/actions";
@@ -91,6 +91,8 @@ const formConfig = {
       errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },
       maxLength: 64,
     },
+    ...zone,
+    ...ward,
     ...mohalla,
     pincode: {
       id: "pincode",

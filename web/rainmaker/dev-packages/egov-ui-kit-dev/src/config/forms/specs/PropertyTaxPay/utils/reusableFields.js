@@ -556,6 +556,83 @@ export const street = {
   },
 };
 
+export const zone = {
+  zone: {
+    id: "zone",
+    jsonPath: "Properties[0].address.zone",
+    type: "AutocompleteDropdown",
+    floatingLabelText: "PT_PROPERTY_DETAILS_ZONE",
+    hintText: "PT_COMMONS_SELECT_PLACEHOLDER",
+    fullWidth: true,
+    localePrefix: true,
+    labelsFromLocalisation: true,
+    boundary: true,
+    numcols: 6,
+    gridDefination: {
+      xs: 12,
+      sm: 6
+    },
+    errorMessage: "PT_PROPERTY_DETAILS_ZONE_ERRORMSG",
+    // dataFetchConfig: {
+    //   url: "egov-location/location/v11/boundarys/_search?hierarchyTypeCode=REVENUE&boundaryType=Locality",
+    //   action: "",
+    //   queryParams: [],
+    //   requestBody: {},
+    //   isDependent: true,
+    //   hierarchyType: "REVENUE",
+    // },
+    errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },
+    // required: true,
+    formName: "propertyAddress",
+    // updateDependentFields: ({ formKey, field, dispatch }) => {
+    //   if (field.value && field.value.length > 0) {
+    //     const mohalla = field.dropDownData.find((option) => {
+    //       return option.value === field.value;
+    //     });
+    //     dispatch(prepareFormData("Properties[0].address.locality.area", mohalla.area));
+    //   }
+    // },
+  },
+};
+
+export const ward = {
+  ward: {
+    id: "ward",
+    jsonPath: "Properties[0].address.ward",
+    type: "AutocompleteDropdown",
+    floatingLabelText: "PT_PROPERTY_DETAILS_WARD",
+    hintText: "PT_COMMONS_SELECT_PLACEHOLDER",
+    fullWidth: true,
+    localePrefix: true,
+    labelsFromLocalisation: true,
+    numcols: 6,
+    gridDefination: {
+      xs: 12,
+      sm: 6
+    },
+    errorMessage: "PT_PROPERTY_DETAILS_WARD_ERRORMSG",
+    // dataFetchConfig: {
+    //   url: "egov-location/location/v11/boundarys/_search?hierarchyTypeCode=REVENUE&boundaryType=Locality",
+    //   action: "",
+    //   queryParams: [],
+    //   requestBody: {},
+    //   isDependent: true,
+    //   hierarchyType: "REVENUE",
+    // },
+    errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },
+    // required: true,
+    formName: "propertyAddress",
+    // updateDependentFields: ({ formKey, field, dispatch }) => {
+    //   if (field.value && field.value.length > 0) {
+    //     const mohalla = field.dropDownData.find((option) => {
+    //       return option.value === field.value;
+    //     });
+    //     dispatch(prepareFormData("Properties[0].address.locality.area", mohalla.area));
+    //   }
+    // },
+  },
+};
+
 export const mohalla = {
   mohalla: {
     id: "mohalla",

@@ -164,7 +164,8 @@ const searchApiCall = async (state, dispatch, index) => {
 
   let formValid = false;
   if (index == 0) {
-    if (searchScreenObject.ids != '' || searchScreenObject.mobileNumber != '' || searchScreenObject.oldpropertyids != '') {
+    if (searchScreenObject.ids != '' || searchScreenObject.mobileNumber != '' || searchScreenObject.oldpropertyids != '' 
+        || searchScreenObject.doorNo != '' || searchScreenObject.locality != '' || searchScreenObject.name != '') {
       formValid = true;
     }
   } else {
