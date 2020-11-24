@@ -79,6 +79,9 @@ const formConfig = {
       numcols: 6,
       type: "dummy",
     },
+    ...zone,
+    ...ward,
+    ...mohalla,
     houseNumber: {
       id: "house-number",
       jsonPath: "Properties[0].address.doorNo",
@@ -112,9 +115,6 @@ const formConfig = {
       errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },
       maxLength: 64,
     },
-    ...zone,
-    ...ward,
-    ...mohalla,
     pincode: {
       id: "pincode",
       type: "number",
