@@ -573,26 +573,19 @@ export const zone = {
       sm: 6
     },
     errorMessage: "PT_PROPERTY_DETAILS_ZONE_ERRORMSG",
-    // dataFetchConfig: {
-    //   url: "egov-location/location/v11/boundarys/_search?hierarchyTypeCode=REVENUE&boundaryType=Locality",
-    //   action: "",
-    //   queryParams: [],
-    //   requestBody: {},
-    //   isDependent: true,
-    //   hierarchyType: "REVENUE",
-    // },
     errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },
-    // required: true,
+    required: true,
     formName: "propertyAddress",
-    // updateDependentFields: ({ formKey, field, dispatch }) => {
-    //   if (field.value && field.value.length > 0) {
-    //     const mohalla = field.dropDownData.find((option) => {
-    //       return option.value === field.value;
-    //     });
-    //     dispatch(prepareFormData("Properties[0].address.locality.area", mohalla.area));
-    //   }
-    // },
-  },
+    updateDependentFields: ({ formKey, field, dispatch, state }) => {
+      if (field.value && field.value.length > 0) {
+      const zoneData = get(state, 'formtemp.zoneData', []);
+      let wardData = zoneData.find(item => item.name === field.value)["children"] || []
+      set(state, "formtemp.wardData", wardData)
+      wardData = wardData.map(item => ({label: `${item.label}-${item.name}`, value: item.name}))
+      dispatch(setFieldProperty("propertyAddress", "ward", "dropDownData", wardData));
+      }
+    }
+  }
 };
 
 export const ward = {
@@ -611,25 +604,19 @@ export const ward = {
       sm: 6
     },
     errorMessage: "PT_PROPERTY_DETAILS_WARD_ERRORMSG",
-    // dataFetchConfig: {
-    //   url: "egov-location/location/v11/boundarys/_search?hierarchyTypeCode=REVENUE&boundaryType=Locality",
-    //   action: "",
-    //   queryParams: [],
-    //   requestBody: {},
-    //   isDependent: true,
-    //   hierarchyType: "REVENUE",
-    // },
     errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },
-    // required: true,
+    required: true,
     formName: "propertyAddress",
-    // updateDependentFields: ({ formKey, field, dispatch }) => {
-    //   if (field.value && field.value.length > 0) {
-    //     const mohalla = field.dropDownData.find((option) => {
-    //       return option.value === field.value;
-    //     });
-    //     dispatch(prepareFormData("Properties[0].address.locality.area", mohalla.area));
-    //   }
-    // },
+    updateDependentFields: ({ formKey, field, dispatch, state }) => {
+      if (field.value && field.value.length > 0) {
+        const wardData = get(state, 'formtemp.wardData', []);
+        let mohallaData = wardData.find(item => item.name === field.value)["children"] || []
+        mohallaData = mohallaData.map(item => {
+          return {label: item.name, value: item.code}
+        })
+        dispatch(setFieldProperty("propertyAddress", "mohalla", "dropDownData", mohallaData));
+      }
+    },
   },
 };
 
@@ -653,14 +640,6 @@ export const mohalla = {
       sm: 6
     },
     errorMessage: "PT_PROPERTY_DETAILS_MOHALLA_ERRORMSG",
-    dataFetchConfig: {
-      url: "egov-location/location/v11/boundarys/_search?hierarchyTypeCode=REVENUE&boundaryType=Locality",
-      action: "",
-      queryParams: [],
-      requestBody: {},
-      isDependent: true,
-      hierarchyType: "REVENUE",
-    },
     errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },
     required: true,
     formName: "propertyAddress",

@@ -7,6 +7,33 @@ import { getLocale } from "egov-ui-kit/utils/localStorageUtils";
 import filter from "lodash/filter";
 import get from "lodash/get";
 import sortBy from "lodash/sortBy";
+import { httpRequest } from "egov-ui-kit/utils/api";
+import { MDMS } from "egov-ui-kit/utils/endPoints";
+import { set } from "lodash";
+
+const getDropDownData = async (state, dispatch, tenantId) => {
+  const requestBody = {
+    MdmsCriteria: {
+      tenantId,
+      moduleDetails: [
+        {
+          moduleName: "egov-location",
+          masterDetails: [{name: "TenantBoundary"}]
+        }
+      ]
+    }
+  }
+  try {
+    const payload = await httpRequest(MDMS.GET.URL, MDMS.GET.ACTION, [], requestBody);
+    const {MdmsRes} = payload
+    const zoneData = !!MdmsRes && !!MdmsRes["egov-location"] ? MdmsRes["egov-location"].TenantBoundary[0].boundary.children : []
+    set(state, "formtemp.zoneData", zoneData)
+    const ddData = zoneData.map(item => ({label: item.name, value: item.name}))
+    dispatch(setFieldProperty("propertyAddress", "zone", "dropDownData", ddData));
+  } catch (error) {
+    console.log("===errr", error)
+  }
+}
 
 const formConfig = {
   name: "propertyAddress",
@@ -27,13 +54,6 @@ const formConfig = {
         xs: 12,
         sm: 6
       },
-      dataFetchConfig: {
-        dependants: [
-          {
-            fieldKey: "mohalla",
-          },
-        ],
-      },
       updateDependentFields: ({ formKey, field, dispatch, state }) => {
         dispatch(prepareFormData("Properties[0].tenantId", field.value));
         dispatch(
@@ -52,6 +72,7 @@ const formConfig = {
         dispatch(
           fetchGeneralMDMSData(requestBody, "PropertyTax", getGeneralMDMSDataDropdownName())
         );
+        getDropDownData(state, dispatch, field.value)
       },
     },
     dummy: {
@@ -146,18 +167,18 @@ const formConfig = {
       const mohallaDropDownData = get(state, 'form.propertyAddress.fields.mohalla.dropDownData', []);
 
       if (process.env.REACT_APP_NAME === "Citizen" && tenant && mohallaDropDownData.length == 0) {
-        const dataFetchConfig = {
-          url: "egov-location/location/v11/boundarys/_search?hierarchyTypeCode=REVENUE&boundaryType=Locality",
-          action: "",
-          queryParams: [{
-            key: "tenantId",
-            value: tenant
-          }],
-          requestBody: {},
-          isDependent: true,
-          hierarchyType: "REVENUE"
-        }
-        fetchDropdownData(dispatch, dataFetchConfig, 'propertyAddress', 'mohalla', state, true);
+        // const dataFetchConfig = {
+        //   url: "egov-location/location/v11/boundarys/_search?hierarchyTypeCode=REVENUE&boundaryType=Locality",
+        //   action: "",
+        //   queryParams: [{
+        //     key: "tenantId",
+        //     value: tenant
+        //   }],
+        //   requestBody: {},
+        //   isDependent: true,
+        //   hierarchyType: "REVENUE"
+        // }
+        // fetchDropdownData(dispatch, dataFetchConfig, 'propertyAddress', 'mohalla', state, true);
       }
       return action;
     } catch (e) {
