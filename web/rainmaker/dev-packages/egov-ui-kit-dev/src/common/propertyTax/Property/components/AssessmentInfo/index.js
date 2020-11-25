@@ -228,6 +228,7 @@ const AssessmentInfo = ({ properties, editIcon, generalMDMSDataById, OldProperty
   let hideSubsectionLabel = false;
   let assessmentItems = [];
   let subUnitItems = [];
+  let facilities = []
   let oldPropertydetails = '';
   const header = 'PT_ASSESMENT_INFO_SUB_HEADER';
   if (OldProperty && Object.keys(OldProperty).length > 0) {
@@ -238,8 +239,7 @@ const AssessmentInfo = ({ properties, editIcon, generalMDMSDataById, OldProperty
     if (propertyDetails && propertyDetails.length > 0) {
       subUnitItems = getUnitInfo(propertyDetails[0]['units'], propertyDetails[0], oldPropertydetails);
       assessmentItems = getAssessmentInfo(propertyDetails[0], generalMDMSDataById, properties, oldPropertydetails, OldProperty);
-      const facilities = getFacilitesInfo(properties, OldProperty)
-      subUnitItems = !!facilities.length ? [[facilities], subUnitItems[0]] : subUnitItems
+       facilities = getFacilitesInfo(properties, OldProperty)
       if (propertyDetails[0].propertySubType === "SHAREDPROPERTY") {
         hideSubsectionLabel = true;
       }
@@ -247,7 +247,12 @@ const AssessmentInfo = ({ properties, editIcon, generalMDMSDataById, OldProperty
   }
 
   return (
-    <PropertyInfoCard editIcon={editIcon} items={assessmentItems} header={header} subSection={subUnitItems} hideSubsectionLabel={hideSubsectionLabel} ></PropertyInfoCard>
+    <React.Fragment>
+      <PropertyInfoCard editIcon={editIcon} items={assessmentItems} header={header} subSection={subUnitItems} hideSubsectionLabel={hideSubsectionLabel} ></PropertyInfoCard>
+      {!!facilities.length && (
+        <PropertyInfoCard items={facilities} header={"PT_FACILITY_HEADER"}></PropertyInfoCard>
+      )}
+    </React.Fragment>
   );
 };
 
