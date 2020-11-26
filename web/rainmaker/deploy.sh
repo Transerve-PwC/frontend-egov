@@ -12,10 +12,6 @@ employeezipname=employee.zip
 citizenrootremotedir=/home/ubuntu/dev/frontend/citizen
 employeerootremotedir=/home/ubuntu/dev/frontend/employee
 
-bootstrap lerna
-
-lerna bootstrap
-
 # build citizen
 
 npm run prod:citizen
