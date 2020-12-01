@@ -68,6 +68,7 @@ const formConfig = {
         dispatch(prepareFormData(`Properties[0].propertyDetails[0].landArea`, null));
         dispatch(prepareFormData(`Properties[0].propertyDetails[0].buildUpArea`, null));
         dispatch(removeForm("plotDetails"));
+        dispatch(removeForm("constructionDetails"));
         removeFormKey(formKey, field, dispatch, state);
         let subTypeObject = get(state, `common.generalMDMSDataById.PropertySubType[${field.value}]`);
         if (!isEmpty(subTypeObject)) {

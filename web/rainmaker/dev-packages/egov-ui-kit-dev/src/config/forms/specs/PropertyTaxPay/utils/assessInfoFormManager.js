@@ -10,6 +10,11 @@ const combinationToFormkeyMapping = {
       path: "PropertyTaxPay/ResidentialIndependantProperty",
       isCoreConfiguration: true,
     })(GenericForm),
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails"
+    })(GenericForm),
     floorForm: formHoc({ formKey: "floorDetails", makeCopy: true, path: "PropertyTaxPay/ResidentialIndependantProperty", isCoreConfiguration: true })(
       GenericForm
     ),
@@ -22,6 +27,7 @@ const combinationToFormkeyMapping = {
     },
     hasPlot: true,
     hasFloor: true,
+    hasConstruction: true
   },
   "RESIDENTIAL-SHAREDPROPERTY": {
     path: "PropertyTaxPay/ResidentialSharedProperty",
@@ -30,6 +36,11 @@ const combinationToFormkeyMapping = {
       isCoreConfiguration: true,
       path: "PropertyTaxPay/ResidentialSharedProperty",
       isCoreConfiguration: true,
+    })(GenericForm),
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
     })(GenericForm),
     floorObject: {
       formKey: "floorDetails",
@@ -40,6 +51,7 @@ const combinationToFormkeyMapping = {
     },
     hasPlot: true,
     hasFloor: false,
+    hasConstruction: true
   },
   "MIXED-INDEPENDENTPROPERTY": {
     path: "PropertyTaxPay/MixedIndependantProperty",
@@ -48,6 +60,11 @@ const combinationToFormkeyMapping = {
       isCoreConfiguration: true,
       path: "PropertyTaxPay/MixedIndependantProperty",
       isCoreConfiguration: true,
+    })(GenericForm),
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
     })(GenericForm),
     floorForm: formHoc({ formKey: "floorDetails", makeCopy: true, path: "PropertyTaxPay/MixedIndependantProperty", isCoreConfiguration: true })(
       GenericForm
@@ -61,6 +78,7 @@ const combinationToFormkeyMapping = {
     },
     hasPlot: true,
     hasFloor: true,
+    hasConstruction: true
   },
   "MIXED-SHAREDPROPERTY": {
     path: "PropertyTaxPay/MixedIndependantProperty",
@@ -68,6 +86,11 @@ const combinationToFormkeyMapping = {
     // floorForm: formHoc({ formKey: "floorDetails", makeCopy: true, path: "PropertyTaxPay/MixedIndependantProperty", isCoreConfiguration: true })(
     //   GenericForm
     // ),
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
+    })(GenericForm),
     floorObject: {
       formKey: "floorDetails",
       isCoreConfiguration: true,
@@ -77,6 +100,7 @@ const combinationToFormkeyMapping = {
     },
     hasPlot: false,
     hasFloor: true,
+    hasConstruction: true
   },
   "COMMERCIAL-INDEPENDENTPROPERTY": {
     path: "PropertyTaxPay/CommercialIndependantProperty",
@@ -85,6 +109,11 @@ const combinationToFormkeyMapping = {
       isCoreConfiguration: true,
       path: "PropertyTaxPay/CommercialIndependantProperty",
       isCoreConfiguration: true,
+    })(GenericForm),
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
     })(GenericForm),
     floorForm: formHoc({ formKey: "floorDetails", makeCopy: true, path: "PropertyTaxPay/CommercialIndependantProperty", isCoreConfiguration: true })(
       GenericForm
@@ -98,6 +127,7 @@ const combinationToFormkeyMapping = {
     },
     hasPlot: true,
     hasFloor: true,
+    hasConstruction: true
   },
   "COMMERCIAL-SHAREDPROPERTY": {
     path: "PropertyTaxPay/CommercialIndependantProperty",
@@ -108,9 +138,15 @@ const combinationToFormkeyMapping = {
       copyName: "floorDetails",
       path: "PropertyTaxPay/CommercialIndependantProperty",
     },
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
+    })(GenericForm),
     // plotForm: formHoc({ formKey: "plotDetails",isCoreConfiguration:true, path: "PropertyTaxPay/CommercialSharedProperty" ,isCoreConfiguration:true})(GenericForm),
     hasPlot: false,
     hasFloor: true,
+    hasConstruction: true
   },
   "INDUSTRIAL-INDEPENDENTPROPERTY": {
     path: "PropertyTaxPay/IndustrialIndependantProperty",
@@ -119,6 +155,11 @@ const combinationToFormkeyMapping = {
       isCoreConfiguration: true,
       path: "PropertyTaxPay/IndustrialIndependantProperty",
       isCoreConfiguration: true,
+    })(GenericForm),
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
     })(GenericForm),
     floorForm: formHoc({ formKey: "floorDetails", makeCopy: true, path: "PropertyTaxPay/IndustrialIndependantProperty", isCoreConfiguration: true })(
       GenericForm
@@ -132,6 +173,7 @@ const combinationToFormkeyMapping = {
     },
     hasPlot: true,
     hasFloor: true,
+    hasConstruction: true
   },
   "INDUSTRIAL-SHAREDPROPERTY": {
     path: "PropertyTaxPay/IndustrialIndependantProperty",
@@ -142,9 +184,15 @@ const combinationToFormkeyMapping = {
       copyName: "floorDetails",
       path: "PropertyTaxPay/IndustrialIndependantProperty",
     },
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
+    })(GenericForm),
     // plotForm: formHoc({ formKey: "plotDetails",isCoreConfiguration:true, path: "PropertyTaxPay/IndustrialSharedProperty" ,isCoreConfiguration:true})(GenericForm),
     hasPlot: false,
     hasFloor: true,
+    hasConstruction: true
   },
   "RELIGIOUS-INDEPENDENTPROPERTY": {
     path: "PropertyTaxPay/ReligiousIndependantProperty",
@@ -153,6 +201,11 @@ const combinationToFormkeyMapping = {
       isCoreConfiguration: true,
       path: "PropertyTaxPay/ReligiousIndependantProperty",
       isCoreConfiguration: true,
+    })(GenericForm),
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
     })(GenericForm),
     floorForm: formHoc({ formKey: "floorDetails", makeCopy: true, path: "PropertyTaxPay/ReligiousIndependantProperty", isCoreConfiguration: true })(
       GenericForm
@@ -166,6 +219,7 @@ const combinationToFormkeyMapping = {
     },
     hasPlot: true,
     hasFloor: true,
+    hasConstruction: true
   },
   "RELIGIOUS-SHAREDPROPERTY": {
     path: "PropertyTaxPay/ReligiousIndependantProperty",
@@ -176,9 +230,15 @@ const combinationToFormkeyMapping = {
       copyName: "floorDetails",
       path: "PropertyTaxPay/ReligiousIndependantProperty",
     },
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
+    })(GenericForm),
     // plotForm: formHoc({ formKey: "plotDetails",isCoreConfiguration:true, path: "PropertyTaxPay/ReligiousSharedProperty" ,isCoreConfiguration:true})(GenericForm),
     hasPlot: false,
     hasFloor: true,
+    hasConstruction: true
   },
   "INSTITUTIONAL-INDEPENDENTPROPERTY": {
     path: "PropertyTaxPay/InstitutionalIndependantProperty",
@@ -187,6 +247,11 @@ const combinationToFormkeyMapping = {
       isCoreConfiguration: true,
       path: "PropertyTaxPay/InstitutionalIndependantProperty",
       isCoreConfiguration: true,
+    })(GenericForm),
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
     })(GenericForm),
     floorForm: formHoc({
       formKey: "floorDetails",
@@ -203,6 +268,7 @@ const combinationToFormkeyMapping = {
     },
     hasPlot: true,
     hasFloor: true,
+    hasConstruction: true
   },
   "INSTITUTIONAL-SHAREDPROPERTY": {
     path: "PropertyTaxPay/InstitutionalIndependantProperty",
@@ -213,9 +279,15 @@ const combinationToFormkeyMapping = {
       copyName: "floorDetails",
       path: "PropertyTaxPay/InstitutionalIndependantProperty",
     },
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
+    })(GenericForm),
     // plotForm: formHoc({ formKey: "plotDetails",isCoreConfiguration:true, path: "PropertyTaxPay/InstitutionalSharedProperty" ,isCoreConfiguration:true})(GenericForm),
     hasPlot: false,
     hasFloor: true,
+    hasConstruction: true
   },
   "OTHERS-INDEPENDENTPROPERTY": {
     path: "PropertyTaxPay/OtherIndependantProperty",
@@ -224,6 +296,11 @@ const combinationToFormkeyMapping = {
       isCoreConfiguration: true,
       path: "PropertyTaxPay/OtherIndependantProperty",
       isCoreConfiguration: true,
+    })(GenericForm),
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
     })(GenericForm),
     floorForm: formHoc({ formKey: "floorDetails", makeCopy: true, path: "PropertyTaxPay/OtherIndependantProperty", isCoreConfiguration: true })(
       GenericForm
@@ -237,6 +314,7 @@ const combinationToFormkeyMapping = {
     },
     hasPlot: true,
     hasFloor: true,
+    hasConstruction: true
   },
   "OTHERS-SHAREDPROPERTY": {
     path: "PropertyTaxPay/OtherIndependantProperty",
@@ -247,9 +325,15 @@ const combinationToFormkeyMapping = {
       copyName: "floorDetails",
       path: "PropertyTaxPay/OtherIndependantProperty",
     },
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
+    })(GenericForm),
     // plotForm: formHoc({ formKey: "plotDetails",isCoreConfiguration:true, path: "PropertyTaxPay/OtherSharedProperty" ,isCoreConfiguration:true})(GenericForm),
     hasPlot: false,
     hasFloor: true,
+    hasConstruction: true
   },
   "PUBLICSPACES-INDEPENDENTPROPERTY": {
     path: "PropertyTaxPay/PublicSpaceIndependantProperty",
@@ -258,6 +342,11 @@ const combinationToFormkeyMapping = {
       isCoreConfiguration: true,
       path: "PropertyTaxPay/PublicSpaceIndependantProperty",
       isCoreConfiguration: true,
+    })(GenericForm),
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
     })(GenericForm),
     floorForm: formHoc({ formKey: "floorDetails", makeCopy: true, path: "PropertyTaxPay/PublicSpaceIndependantProperty", isCoreConfiguration: true })(
       GenericForm
@@ -271,6 +360,7 @@ const combinationToFormkeyMapping = {
     },
     hasPlot: true,
     hasFloor: true,
+    hasConstruction: true
   },
   "PUBLICSPACES-SHAREDPROPERTY": {
     path: "PropertyTaxPay/PublicSpaceIndependantProperty",
@@ -281,9 +371,15 @@ const combinationToFormkeyMapping = {
       copyName: "floorDetails",
       path: "PropertyTaxPay/PublicSpaceIndependantProperty",
     },
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonConstructionDetails",
+    })(GenericForm),
     // plotForm: formHoc({ formKey: "plotDetails",isCoreConfiguration:true, path: "PropertyTaxPay/PublicSpaceSharedProperty" ,isCoreConfiguration:true})(GenericForm),
     hasPlot: false,
     hasFloor: true,
+    hasConstruction: true
   },
   "COMMON-VACANT": {
     path: "PropertyTaxPay/CommonVacantLandProperty",
@@ -293,8 +389,14 @@ const combinationToFormkeyMapping = {
       path: "PropertyTaxPay/CommonVacantLandProperty",
       isCoreConfiguration: true,
     })(GenericForm),
+    constructionForm: formHoc({
+      formKey: "constructionDetails",
+      isCoreConfiguration: true,
+      path: "PropertyTaxPay/CommonVacantLandProperty",
+    })(GenericForm),
     hasPlot: true,
     hasFloor: false,
+    hasConstruction: true
   },
 };
 

@@ -10,6 +10,8 @@ import isEmpty from "lodash/isEmpty";
 import filter from "lodash/filter";
 import { localStorageSet, localStorageGet } from "egov-ui-kit/utils/localStorageUtils";
 import { setFieldProperty } from "egov-ui-kit/redux/form/actions";
+import { httpRequest } from "egov-ui-kit/utils/api";
+import { MDMS } from "egov-ui-kit/utils/endPoints";
 
 let floorDropDownData = [];
 
@@ -717,3 +719,96 @@ export const mergeMaster = (masterOne, masterTwo, parentName = "") => {
   }
   return dropDownData;
 };
+
+export const constructionType = {
+  constructionType: {
+      id: "constructionType",
+      jsonPath: "Properties[0].propertyDetails[0].constructionType",
+      type: "AutocompleteDropdown",
+      floatingLabelText: "PT_PROPERTY_DETAILS_CONSTRUCTION_TYPE",
+      hintText: "PT_COMMONS_SELECT_PLACEHOLDER",
+      fullWidth: true,
+      localePrefix: true,
+      labelsFromLocalisation: true,
+      boundary: true,
+      numcols: 6,
+      gridDefination: {
+        xs: 12,
+        sm: 6
+      },
+      errorMessage: "PT_PROPERTY_DETAILS_CONSTRUCTION_TYPE_ERRORMSG",
+      errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },
+      required: true,
+      formName: "constructionDetails"
+    }
+}
+
+export const roadWidth = {
+  roadWidth: {
+    id: "roadWidth",
+    jsonPath: "Properties[0].propertyDetails[0].roadWidth",
+    type: "AutocompleteDropdown",
+    floatingLabelText: "PT_PROPERTY_DETAILS_ROAD_WIDTH",
+    hintText: "PT_COMMONS_SELECT_PLACEHOLDER",
+    fullWidth: true,
+    localePrefix: true,
+    labelsFromLocalisation: true,
+    boundary: true,
+    numcols: 6,
+    gridDefination: {
+      xs: 12,
+      sm: 6
+    },
+    errorMessage: "PT_PROPERTY_DETAILS_ROAD_WIDTH_ERRORMSG",
+    errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },
+    required: true,
+    formName: "constructionDetails"
+  }
+}
+
+const setConstructionTypeDropdown = async (state, action, dispatch, formKey) => {
+    const propertyType = get(state, "form.basicInformation.fields.typeOfBuilding.value");
+    let tenantId = get(state, 'form.propertyAddress.fields.city.value', null);
+    tenantId = !!tenantId ? tenantId.split(".")[0] : tenantId
+    const requestBody = {
+      MdmsCriteria: {
+        tenantId,
+        moduleDetails: [
+          {
+            moduleName: "PropertyTax",
+            masterDetails: [{name: "ConstructionType"}, {name: "RoadWidth"}]
+          }
+        ]
+      }
+    }
+    try {
+      const payload = await httpRequest(MDMS.GET.URL, MDMS.GET.ACTION, [], requestBody);
+      const {PropertyTax = {}} = payload.MdmsRes;
+      let {ConstructionType = [], RoadWidth = []} = PropertyTax;
+      if(propertyType === "VACANT") {
+        ConstructionType = ConstructionType.filter(item => item.code === "vacant_land")
+      } else {
+        ConstructionType = ConstructionType.filter(item => item.code !== "vacant_land")
+      }
+      ConstructionType = ConstructionType.map(item => ({label: item.name, value: item.code}))
+      dispatch(setFieldProperty(formKey, "constructionType", "dropDownData", ConstructionType));
+      // if(ConstructionType.length === 1) {
+      //   dispatch(setFieldProperty(formKey, "constructionType", "value", ConstructionType[0].value)); 
+      // }
+      RoadWidth = RoadWidth.map(item =>  ({label: item.name, value: item.code}))
+      dispatch(setFieldProperty(formKey, "roadWidth", "dropDownData", RoadWidth));
+    } catch (error) {
+      console.log("=====error", error)
+    }
+}
+
+export const beforeInitFormForConstruction = {
+  beforeInitForm: (action, store) => {
+    let state = store.getState();
+    let { dispatch } = store;
+    const { form } = action;
+    const { name: formKey, fields } = form;
+    setConstructionTypeDropdown(state, action, dispatch, formKey)
+    return action;
+  }
+}

@@ -550,6 +550,7 @@ export const renderPlotAndFloorDetails = (fromReviewPage, PlotComp, FloorComp, s
     let pathFormKeyObject = getPlotAndFloorFormConfigPath(basicInformation.fields.typeOfUsage.value, basicInformation.fields.typeOfBuilding.value);
     return !isEmpty(pathFormKeyObject) ? (
       <div>
+        {pathFormKeyObject.hasConstruction && <PlotComp component={pathFormKeyObject.constructionForm} disabled={fromReviewPage}/>}
         {pathFormKeyObject.hasPlot && <PlotComp component={pathFormKeyObject.plotForm} disabled={fromReviewPage} />}
         {pathFormKeyObject.hasFloor && <FloorComp componentDetails={pathFormKeyObject.floorObject} disabled={fromReviewPage} />}
       </div>
