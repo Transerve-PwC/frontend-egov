@@ -54,12 +54,20 @@ export const getPlotSizeInfo = (propertyDetails) => {
     ? "NA" : propertyDetails.uom ? `${propertyDetails.landArea} ${propertyDetails.uom}` : `${Math.round(propertyDetails.landArea * 100) / 100} sq yards`;
 }
 
-export const getConstructionTypeInfo = (propertyDetails) => {
-  return propertyDetails.constructionType ? getTranslatedLabel(`PT_CONSTRUCTION_TYPE_${propertyDetails.constructionType}`, localizationLabelsData) : "NA";
+export const getConstructionTypeInfo = (unit) => {
+  return unit && unit.constructionType ? getTranslatedLabel('PT_CONSTRUCTION_TYPE_' + unit && unit.constructionType, localizationLabelsData) : "NA";
 }
 
 export const getRoadWidthInfo = (propertyDetails) => {
-  return propertyDetails.roadWidth ? getTranslatedLabel(`PT_CONSTRUCTION_TYPE_${propertyDetails.roadWidth}`, localizationLabelsData) : "NA";
+  return propertyDetails.roadWidth ? getTranslatedLabel(`PT_ROAD_WIDTH_${propertyDetails.roadWidth}`, localizationLabelsData) : "NA";
+}
+
+export const getConstructionYearInfo = (propertyDetails) => {
+  return propertyDetails.constructionYear || "NA"
+}
+
+export const getCategoryInfo = (unit) => {
+  return unit && unit.category ? getTranslatedLabel('PT_CATEGORY_' + unit && unit.category, localizationLabelsData) : "NA";
 }
 
 export const getRainWaterHarvestingInfo = (properties) => {
@@ -118,9 +126,9 @@ export const getAssessmentInfo = (propertyDetails, generalMDMSDataById, properti
         oldValue: oldPropertydetails && getBuildingTypeInfo(generalMDMSDataById, oldPropertydetails)
       },
       {
-        key: getTranslatedLabel("PT_ASSESMENT_INFO_CONSTRUCTION_TYPE", localizationLabelsData),
-        value: getConstructionTypeInfo(propertyDetails),
-        oldValue: oldPropertydetails && getConstructionTypeInfo(oldPropertydetails)
+        key: getTranslatedLabel("PT_ASSESMENT_INFO_CONSTRUCTION_YEAR", localizationLabelsData),
+        value: getConstructionYearInfo(propertyDetails),
+        oldValue: oldPropertydetails && getConstructionYearInfo(oldPropertydetails)
       },
       {
         key: getTranslatedLabel("PT_ASSESMENT_INFO_ROAD_WIDTH", localizationLabelsData),
@@ -223,7 +231,16 @@ export const getUnitInfo = (units = [], propertyDetails, oldPropertydetails) => 
         key: getTranslatedLabel("PT_FORM2_BUILT_AREA", localizationLabelsData),
         value: unit.unitArea ? unit.unitArea + '' : "NA",
         oldValue: oldPropertydetails && oldPropertydetails.units && oldPropertydetails.units[index] && (`${Math.round(oldPropertydetails.units[index].unitArea * 9 * 100) / 100}`) || "NA",
-      }];
+      }, {
+        key: getTranslatedLabel("PT_ASSESMENT_INFO_CONSTRUCTION_TYPE", localizationLabelsData),
+        value: getConstructionTypeInfo(unit),
+        oldValue: oldPropertydetails && oldPropertydetails.units && oldPropertydetails.units[index] && getConstructionTypeInfo(oldPropertydetails.units[index]) || "NA"
+      }, {
+        key: getTranslatedLabel("PT_ASSESMENT_INFO_CATEGORY", localizationLabelsData),
+        value: getCategoryInfo(unit),
+        oldValue: oldPropertydetails && oldPropertydetails.units && oldPropertydetails.units[index] && getCategoryInfo(oldPropertydetails.units[index]) || "NA"
+      },
+    ];
       if (unit.occupancyType === "RENTED") {
         floor.push({
           key: getTranslatedLabel("PT_FORM2_TOTAL_ANNUAL_RENT", localizationLabelsData),

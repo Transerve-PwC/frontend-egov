@@ -1,8 +1,9 @@
-import {constructionType, roadWidth, beforeInitFormForConstruction} from "../utils/reusableFields";
+import {constructionType, constructionYear, roadWidth, beforeInitFormForConstruction} from "../utils/reusableFields";
 const formConfig = {
   name: "constructionDetails",
   fields: {
-    ...constructionType,
+    // ...constructionType,
+    ...constructionYear,
     ...roadWidth
   },
   isFormValid: false,

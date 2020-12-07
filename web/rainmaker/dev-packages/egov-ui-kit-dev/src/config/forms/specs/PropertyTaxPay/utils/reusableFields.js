@@ -254,6 +254,7 @@ export const beforeInitForm = {
         set(action, "form.fields.floorName.hideField", true);
       }
     }
+    setConstructionTypeDropdown(state, action, dispatch, formKey)
 
     //For adding multiple units to prepareFormData
     if (formKey.startsWith(`floorDetails_`)) {
@@ -378,6 +379,8 @@ export const beforeInitFormForPlot = {
   beforeInitForm: (action, store) => {
     let state = store.getState();
     let { dispatch } = store;
+    const { form } = action
+    const { name: formKey } = form;
     const propertyType = get(state, "form.basicInformation.fields.typeOfBuilding.value");
     const { Floor } = state.common && state.common.generalMDMSDataById;
     if (get(action, "form.fields.floorName")) {
@@ -393,6 +396,10 @@ export const beforeInitFormForPlot = {
       var usageCategoryMinor = get(state, "common.prepareFormData.Properties[0].propertyDetails[0].usageCategoryMinor");
       var usageCategoryMajor = get(state, "common.prepareFormData.Properties[0].propertyDetails[0].usageCategoryMajor");
       set(action, "form.fields.subUsageType.hideField", false);
+
+      if(usageCategoryMajor === "RESIDENTIAL" && propertyType === "SHAREDPROPERTY") {
+        setConstructionTypeDropdown(state, action, dispatch, formKey)
+      }
 
       if (usageCategoryMinor && usageCategoryMajor !== "MIXED") {
         var filteredSubUsageMinor = filter(
@@ -723,7 +730,7 @@ export const mergeMaster = (masterOne, masterTwo, parentName = "") => {
 export const constructionType = {
   constructionType: {
       id: "constructionType",
-      jsonPath: "Properties[0].propertyDetails[0].constructionType",
+      jsonPath: "Properties[0].propertyDetails[0].units[0].constructionType",
       type: "AutocompleteDropdown",
       floatingLabelText: "PT_PROPERTY_DETAILS_CONSTRUCTION_TYPE",
       hintText: "PT_COMMONS_SELECT_PLACEHOLDER",
@@ -731,16 +738,30 @@ export const constructionType = {
       localePrefix: true,
       labelsFromLocalisation: true,
       boundary: true,
-      numcols: 6,
+      numcols: 4,
       gridDefination: {
         xs: 12,
-        sm: 6
+        sm: 4
       },
       errorMessage: "PT_PROPERTY_DETAILS_CONSTRUCTION_TYPE_ERRORMSG",
       errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },
       required: true,
-      formName: "constructionDetails"
+      formName: "plotDetails"
     }
+}
+
+export const constructionYear = {
+  constructionYear: {
+    id: "constructionYear",
+    jsonPath: "Properties[0].propertyDetails[0].constructionYear",
+    type: "textfield",
+    floatingLabelText: "PT_PROPERTY_DETAILS_CONSTRUCTION_YEAR",
+    hintText: "PT_PROPERTY_DETAILS_CONSTRUCTION_YEAR_PLACEHOLDER",
+    numcols: 6,
+    errorMessage: "PT_PROPERTY_DETAILS_CONSTRUCTION_YEAR_ERRORMSG",
+    errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },
+    maxLength: 64,
+  }
 }
 
 export const roadWidth = {
@@ -766,8 +787,35 @@ export const roadWidth = {
   }
 }
 
+export const floorCategories = {
+  floorCategories: {
+    id: "floorCategories",
+    jsonPath: "Properties[0].propertyDetails[0].units[0].category",
+    type: "AutocompleteDropdown",
+      floatingLabelText: "PT_PROPERTY_DETAILS_CATEGORY",
+      hintText: "PT_COMMONS_SELECT_PLACEHOLDER",
+      fullWidth: true,
+      localePrefix: true,
+      labelsFromLocalisation: true,
+      boundary: true,
+      numcols: 4,
+      gridDefination: {
+        xs: 12,
+        sm: 4
+      },
+      errorMessage: "PT_PROPERTY_DETAILS_CATEGORY_ERRORMSG",
+      errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },
+      required: true,
+      formName: "plotDetails"
+  }
+}
+
 const setConstructionTypeDropdown = async (state, action, dispatch, formKey) => {
     const propertyType = get(state, "form.basicInformation.fields.typeOfBuilding.value");
+    var usageCategoryMajor = get(state, "form.basicInformation.fields.typeOfUsage.value");
+    if(usageCategoryMajor === "RESIDENTIAL") {
+      set(action, "form.fields.floorCategories.hideField", true);
+    }
     let tenantId = get(state, 'form.propertyAddress.fields.city.value', null);
     tenantId = !!tenantId ? tenantId.split(".")[0] : tenantId
     const requestBody = {
@@ -776,7 +824,7 @@ const setConstructionTypeDropdown = async (state, action, dispatch, formKey) => 
         moduleDetails: [
           {
             moduleName: "PropertyTax",
-            masterDetails: [{name: "ConstructionType"}, {name: "RoadWidth"}]
+            masterDetails: [{name: "ConstructionType"}, {name: "Categories"}]
           }
         ]
       }
@@ -784,22 +832,45 @@ const setConstructionTypeDropdown = async (state, action, dispatch, formKey) => 
     try {
       const payload = await httpRequest(MDMS.GET.URL, MDMS.GET.ACTION, [], requestBody);
       const {PropertyTax = {}} = payload.MdmsRes;
-      let {ConstructionType = [], RoadWidth = []} = PropertyTax;
+      let {ConstructionType = [], Categories = []} = PropertyTax;
       if(propertyType === "VACANT") {
         ConstructionType = ConstructionType.filter(item => item.code === "vacant_land")
       } else {
         ConstructionType = ConstructionType.filter(item => item.code !== "vacant_land")
       }
       ConstructionType = ConstructionType.map(item => ({label: item.name, value: item.code}))
+      Categories = Categories.map(item => ({label: item.name, value: item.code}))
       dispatch(setFieldProperty(formKey, "constructionType", "dropDownData", ConstructionType));
-      // if(ConstructionType.length === 1) {
-      //   dispatch(setFieldProperty(formKey, "constructionType", "value", ConstructionType[0].value)); 
-      // }
-      RoadWidth = RoadWidth.map(item =>  ({label: item.name, value: item.code}))
-      dispatch(setFieldProperty(formKey, "roadWidth", "dropDownData", RoadWidth));
+      dispatch(setFieldProperty(formKey, "floorCategories", "dropDownData", Categories))
     } catch (error) {
       console.log("=====error", error)
     }
+}
+
+const setRoadWidthType = async (state, action, dispatch, formKey) => {
+  const propertyType = get(state, "form.basicInformation.fields.typeOfBuilding.value");
+  let tenantId = get(state, 'form.propertyAddress.fields.city.value', null);
+  tenantId = !!tenantId ? tenantId.split(".")[0] : tenantId
+  const requestBody = {
+    MdmsCriteria: {
+      tenantId,
+      moduleDetails: [
+        {
+          moduleName: "PropertyTax",
+          masterDetails: [{name: "RoadWidth"}]
+        }
+      ]
+    }
+  }
+  try {
+    const payload = await httpRequest(MDMS.GET.URL, MDMS.GET.ACTION, [], requestBody);
+    const {PropertyTax = {}} = payload.MdmsRes;
+    let {RoadWidth = []} = PropertyTax;
+    RoadWidth = RoadWidth.map(item =>  ({label: item.name, value: item.code}))
+    dispatch(setFieldProperty(formKey, "roadWidth", "dropDownData", RoadWidth));
+  } catch (error) {
+    console.log("=====error", error)
+  }
 }
 
 export const beforeInitFormForConstruction = {
@@ -808,7 +879,7 @@ export const beforeInitFormForConstruction = {
     let { dispatch } = store;
     const { form } = action;
     const { name: formKey, fields } = form;
-    setConstructionTypeDropdown(state, action, dispatch, formKey)
+    setRoadWidthType(state, action, dispatch, formKey)
     return action;
   }
 }
