@@ -761,6 +761,7 @@ export const constructionYear = {
     errorMessage: "PT_PROPERTY_DETAILS_CONSTRUCTION_YEAR_ERRORMSG",
     errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },
     maxLength: 64,
+    pattern: /^(18|19|2[0-9])\d{2}$/i
   }
 }
 
