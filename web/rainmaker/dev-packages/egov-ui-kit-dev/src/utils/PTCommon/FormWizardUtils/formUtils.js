@@ -125,6 +125,8 @@ export const convertToOldPTObject = (newObject) => {
           auditDetails: {},
           calculation: null,
           channel: null,
+          constructionYear: null,
+          roadWidth: null
         },
       ],
       additionalDetails: null,
@@ -192,6 +194,8 @@ export const convertToOldPTObject = (newObject) => {
     unit.unitArea = unit.constructionDetail.builtUpArea;
     return { ...unit }
   })
+  propertyDetails.roadWidth = newProperty.roadWidth;
+  propertyDetails.constructionYear = newProperty.constructionYear;
   localStorageSet("previousFloorNo", newProperty.noOfFloors)
   property["propertyDetails"] = [propertyDetails];
   Properties[0] = { ...newProperty, ...property };

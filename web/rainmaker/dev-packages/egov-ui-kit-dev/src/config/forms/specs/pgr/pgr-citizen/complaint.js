@@ -84,12 +84,12 @@ const formConfig = {
       boundary: true,
       dropDownData: [],
       dataFetchConfig: {
-        url: "egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality",
+        url: "egov-location/location/v11/boundarys/_search?hierarchyTypeCode=REVENUE&boundaryType=Locality",
         action: "",
         queryParams: [],
         requestBody: {},
         isDependent: true,
-        hierarchyType: "ADMIN",
+        hierarchyType: "REVENUE",
       },
 
       errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },

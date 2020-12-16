@@ -55,11 +55,11 @@ export const getPlotSizeInfo = (propertyDetails) => {
 }
 
 export const getConstructionTypeInfo = (unit) => {
-  return unit && unit.constructionType ? getTranslatedLabel('PT_CONSTRUCTION_TYPE_' + unit && unit.constructionType, localizationLabelsData) : "NA";
+  return unit && unit.constructionType ? getTranslatedLabel(`PT_CONSTRUCTION_TYPE_${unit.constructionType.toUpperCase()}`, localizationLabelsData) : "NA";
 }
 
 export const getRoadWidthInfo = (propertyDetails) => {
-  return propertyDetails.roadWidth ? getTranslatedLabel(`PT_ROAD_WIDTH_${propertyDetails.roadWidth}`, localizationLabelsData) : "NA";
+  return propertyDetails.roadWidth ? getTranslatedLabel(`PT_ROAD_WIDTH_${propertyDetails.roadWidth.toUpperCase()}`, localizationLabelsData) : "NA";
 }
 
 export const getConstructionYearInfo = (propertyDetails) => {
@@ -67,7 +67,7 @@ export const getConstructionYearInfo = (propertyDetails) => {
 }
 
 export const getCategoryInfo = (unit) => {
-  return unit && unit.category ? getTranslatedLabel('PT_CATEGORY_' + unit && unit.category, localizationLabelsData) : "NA";
+  return unit && unit.category ? getTranslatedLabel(`PT_CATEGORY_${unit.category}`, localizationLabelsData) : "NA";
 }
 
 export const getRainWaterHarvestingInfo = (properties) => {
