@@ -31,6 +31,21 @@ export const getAddressItems = (properties, OldProperty) => {
         oldValue: OldProperty && OldProperty.address && OldProperty.address.city
       },
       {
+        key: getTranslatedLabel("PT_PROPERTY_ADDRESS_ZONE", localizationLabelsData),
+        value: address.zone || "NA",
+        oldValue: OldProperty && OldProperty.address && OldProperty.address.zone
+      },
+      {
+        key: getTranslatedLabel("PT_PROPERTY_ADDRESS_WARD", localizationLabelsData),
+        value: address.ward || "NA",
+        oldValue: OldProperty && OldProperty.address && OldProperty.address.ward
+      },
+      {
+        key: getTranslatedLabel("PT_PROPERTY_ADDRESS_MOHALLA", localizationLabelsData),
+        value: (getTranslatedLabel((`${stateId}_${cityId}_REVENUE_${localityCode}`), localizationLabelsData)) || "NA",
+        oldValue: (getTranslatedLabel((`${oldStateId}_${oldCityId}_REVENUE_${oldLocality}`), localizationLabelsData)) || "NA",
+      },
+      {
         key: getTranslatedLabel("PT_PROPERTY_ADDRESS_HOUSE_NO", localizationLabelsData),
         value: address.doorNo || "NA",
         oldValue: OldProperty && OldProperty.address && OldProperty.address.doorNo
@@ -44,11 +59,6 @@ export const getAddressItems = (properties, OldProperty) => {
         key: getTranslatedLabel("PT_PROPERTY_ADDRESS_STREET_NAME", localizationLabelsData),
         value: address.street || "NA",
         oldValue: OldProperty && OldProperty.address && OldProperty.address.street
-      },
-      {
-        key: getTranslatedLabel("PT_PROPERTY_ADDRESS_MOHALLA", localizationLabelsData),
-        value: (getTranslatedLabel((`${stateId}_${cityId}_REVENUE_${localityCode}`), localizationLabelsData)) || "NA",
-        oldValue: (getTranslatedLabel((`${oldStateId}_${oldCityId}_REVENUE_${oldLocality}`), localizationLabelsData)) || "NA",
       },
       {
         key: getTranslatedLabel("PT_PROPERTY_ADDRESS_PINCODE", localizationLabelsData),

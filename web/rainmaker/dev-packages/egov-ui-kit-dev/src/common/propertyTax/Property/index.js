@@ -439,7 +439,7 @@ const transform = (floor, key, generalMDMSDataById, propertyDetails) => {
       if (floor[dataKey] === "NONRESIDENTIAL") {
         return generalMDMSDataById["UsageCategoryMinor"] && generalMDMSDataById["UsageCategoryMinor"][floor["usageCategoryMinor"]] && generalMDMSDataById["UsageCategoryMinor"][floor["usageCategoryMinor"]].name ? generalMDMSDataById["UsageCategoryMinor"][floor["usageCategoryMinor"]].name : "NA";
       } else {
-        return generalMDMSDataById[masterName] ? generalMDMSDataById[masterName][floor[dataKey]].name : "NA";
+        return generalMDMSDataById[masterName] && generalMDMSDataById[masterName][floor[dataKey]] ? generalMDMSDataById[masterName][floor[dataKey]].name : "NA";
       }
     } else {
       return "NA";
