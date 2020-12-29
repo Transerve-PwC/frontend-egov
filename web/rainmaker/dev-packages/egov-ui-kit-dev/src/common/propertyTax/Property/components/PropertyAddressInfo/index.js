@@ -32,13 +32,13 @@ export const getAddressItems = (properties, OldProperty) => {
       },
       {
         key: getTranslatedLabel("PT_PROPERTY_ADDRESS_ZONE", localizationLabelsData),
-        value: address.zone || "NA",
-        oldValue: OldProperty && OldProperty.address && OldProperty.address.zone
+        value: address.zone ? (getTranslatedLabel((`${stateId}_${cityId}_ZONE_${address.zone}`), localizationLabelsData)) : "NA",
+        oldValue: OldProperty && OldProperty.address && OldProperty.address.zone ? (getTranslatedLabel((`${oldStateId}_${oldCityId}_ZONE_${OldProperty.address.zone}`), localizationLabelsData)) : "NA"
       },
       {
         key: getTranslatedLabel("PT_PROPERTY_ADDRESS_WARD", localizationLabelsData),
-        value: address.ward || "NA",
-        oldValue: OldProperty && OldProperty.address && OldProperty.address.ward
+        value: address.ward ? (getTranslatedLabel((`${stateId}_${cityId}_WARD_${address.ward}`), localizationLabelsData)) : "NA",
+        oldValue: OldProperty && OldProperty.address && OldProperty.address.ward ? (getTranslatedLabel((`${oldStateId}_${oldCityId}_ZONE_${OldProperty.address.ward}`), localizationLabelsData)) : "NA"
       },
       {
         key: getTranslatedLabel("PT_PROPERTY_ADDRESS_MOHALLA", localizationLabelsData),
