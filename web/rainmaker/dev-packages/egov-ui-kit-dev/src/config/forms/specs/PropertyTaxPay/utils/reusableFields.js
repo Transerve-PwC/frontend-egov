@@ -586,11 +586,13 @@ export const zone = {
     required: true,
     formName: "propertyAddress",
     updateDependentFields: ({ formKey, field, dispatch, state }) => {
+      const { localizationLabels } = state.app;
       if (field.value && field.value.length > 0) {
       const zoneData = get(state, 'formtemp.zoneData', []);
-      let wardData = zoneData.find(item => item.name === field.value)["children"] || []
+      let tenantId = get(state, 'form.propertyAddress.fields.city.value', null);
+      let wardData = zoneData.find(item => item.code === field.value)["children"] || []
       set(state, "formtemp.wardData", wardData)
-      wardData = wardData.map(item => ({label: `${item.label}-${item.name}`, value: item.name}))
+      wardData = wardData.map(item => ({label: getTranslatedLabel(`${tenantId.replaceAll(".", "_").toUpperCase()}_WARD_${item.code.toUpperCase()}`, localizationLabels), value: item.code}))
       dispatch(setFieldProperty("propertyAddress", "ward", "dropDownData", wardData));
       }
     }
@@ -617,11 +619,13 @@ export const ward = {
     required: true,
     formName: "propertyAddress",
     updateDependentFields: ({ formKey, field, dispatch, state }) => {
+      const { localizationLabels } = state.app;
       if (field.value && field.value.length > 0) {
+        let tenantId = get(state, 'form.propertyAddress.fields.city.value', null);
         const wardData = get(state, 'formtemp.wardData', []);
-        let mohallaData = wardData.find(item => item.name === field.value)["children"] || []
+        let mohallaData = wardData.find(item => item.code === field.value)["children"] || []
         mohallaData = mohallaData.map(item => {
-          return {label: item.name, value: item.code}
+          return {label: getTranslatedLabel(`${tenantId.replaceAll(".", "_").toUpperCase()}_REVENUE_${item.code.toUpperCase()}`), value: item.code}
         })
         dispatch(setFieldProperty("propertyAddress", "mohalla", "dropDownData", mohallaData));
       }

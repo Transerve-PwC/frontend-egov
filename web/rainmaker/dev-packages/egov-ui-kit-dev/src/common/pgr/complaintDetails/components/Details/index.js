@@ -59,7 +59,6 @@ class Details extends Component {
       }
     }
     const titleKey = complaint && "SERVICEDEFS." + complaint.toUpperCase();
-
     return (
       <div>
         <Card
@@ -170,7 +169,7 @@ class Details extends Component {
                     />
                     <div className="col-xs-6  col-sm-8 col-md-10 no-padding complaint-address-display">
                       <Label
-                        label={locality}
+                        label={`${city.toUpperCase().replace(/[.]/g, "_")}_REVENUE_${mohalla.toUpperCase()}`}
                         className="status-result-color"
                         id="complaint-details-complaint-location"
                         labelStyle={{ color: "inherit" }}

@@ -24,11 +24,12 @@ const getDropDownData = async (state, dispatch, tenantId) => {
     }
   }
   try {
+    const { localizationLabels } = state.app;
     const payload = await httpRequest(MDMS.GET.URL, MDMS.GET.ACTION, [], requestBody);
     const {MdmsRes} = payload
     const zoneData = !!MdmsRes && !!MdmsRes["egov-location"] ? MdmsRes["egov-location"].TenantBoundary[0].boundary.children : []
     set(state, "formtemp.zoneData", zoneData)
-    const ddData = zoneData.map(item => ({label: item.name, value: item.name}))
+    const ddData = zoneData.map(item => ({label: getTranslatedLabel(`${tenantId.replaceAll(".", "_").toUpperCase()}_ZONE_${item.code.toUpperCase()}`, localizationLabels), value: item.code}))
     dispatch(setFieldProperty("propertyAddress", "zone", "dropDownData", ddData));
   } catch (error) {
     console.log("===errr", error)
