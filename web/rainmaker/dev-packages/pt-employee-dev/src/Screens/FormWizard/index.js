@@ -751,10 +751,16 @@ class FormWizard extends Component {
           break;
         }
 
-        const { basicInformation, plotDetails } = form;
+        const { basicInformation, plotDetails, constructionDetails } = form;
         if (basicInformation) {
           const isBasicInformationFormValid = validateForm(basicInformation);
           if (isBasicInformationFormValid) {
+            if(constructionDetails) {
+              const isConstructionDetailsFormValid = validateForm(constructionDetails);
+              if(!isConstructionDetailsFormValid) {
+                displayFormErrorsAction("constructionDetails");
+              }
+            }
             if (plotDetails) {
               const isPlotDetailsFormValid = validateForm(plotDetails);
               if (isPlotDetailsFormValid) {
