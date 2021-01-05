@@ -789,50 +789,51 @@ class FormWizard extends Component {
           if (isBasicInformationFormValid) {
             if(constructionDetails) {
               const isConstructionDetailsFormValid = validateForm(constructionDetails);
-              if(!isConstructionDetailsFormValid) {
-                displayFormErrorsAction("constructionDetails");
-              }
-            }
-            if (plotDetails) {
-              const isPlotDetailsFormValid = validateForm(plotDetails);
-              if (isPlotDetailsFormValid) {
-                const isTotalUnitSizeValid = plotDetails.fields.plotSize
-                  ? validateUnitandPlotSize(plotDetails, form)
-                  : true;
-                if (isTotalUnitSizeValid) {
-                  if (get(plotDetails, "fields.floorCount")) {
-                    let floorValidation = true;
-                    for (const variable in form) {
-                      if (
-                        variable.search("customSelect") !== -1 ||
-                        variable.search("floorDetails") !== -1
-                      ) {
-                        const isDynamicFormValid = validateForm(form[variable]);
-                        if (!isDynamicFormValid) {
-                          displayFormErrorsAction(variable);
-                          floorValidation = false;
+              if(isConstructionDetailsFormValid) {
+                if (plotDetails) {
+                  const isPlotDetailsFormValid = validateForm(plotDetails);
+                  if (isPlotDetailsFormValid) {
+                    const isTotalUnitSizeValid = plotDetails.fields.plotSize
+                      ? validateUnitandPlotSize(plotDetails, form)
+                      : true;
+                    if (isTotalUnitSizeValid) {
+                      if (get(plotDetails, "fields.floorCount")) {
+                        let floorValidation = true;
+                        for (const variable in form) {
+                          if (
+                            variable.search("customSelect") !== -1 ||
+                            variable.search("floorDetails") !== -1
+                          ) {
+                            const isDynamicFormValid = validateForm(form[variable]);
+                            if (!isDynamicFormValid) {
+                              displayFormErrorsAction(variable);
+                              floorValidation = false;
+                            }
+                          }
                         }
+                        if (floorValidation) {
+                          callDraft(this);
+                          window.scrollTo(0, 0);
+                          this.setState({
+                            selected: index,
+                            formValidIndexArray: [...formValidIndexArray, selected]
+                          });
+                        }
+                      } else {
+                        callDraft(this);
+                        window.scrollTo(0, 0);
+                        this.setState({
+                          selected: index,
+                          formValidIndexArray: [...formValidIndexArray, selected]
+                        });
                       }
                     }
-                    if (floorValidation) {
-                      callDraft(this);
-                      window.scrollTo(0, 0);
-                      this.setState({
-                        selected: index,
-                        formValidIndexArray: [...formValidIndexArray, selected]
-                      });
-                    }
                   } else {
-                    callDraft(this);
-                    window.scrollTo(0, 0);
-                    this.setState({
-                      selected: index,
-                      formValidIndexArray: [...formValidIndexArray, selected]
-                    });
+                    displayFormErrorsAction("plotDetails");
                   }
                 }
               } else {
-                displayFormErrorsAction("plotDetails");
+                displayFormErrorsAction("constructionDetails");
               }
             }
           } else {
