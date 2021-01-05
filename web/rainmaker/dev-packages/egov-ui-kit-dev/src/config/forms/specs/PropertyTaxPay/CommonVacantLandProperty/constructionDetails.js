@@ -2,8 +2,6 @@ import {constructionType, constructionYear, roadWidth, beforeInitFormForConstruc
 const formConfig = {
   name: "constructionDetails",
   fields: {
-    // ...constructionType,
-    ...constructionYear,
     ...roadWidth
   },
   isFormValid: false,

@@ -20,8 +20,7 @@ const formConfig = {
     ...occupancy,
     ...builtArea,
     ...annualRent,
-    ...constructionType,
-    ...floorCategories
+    ...constructionType
   },
   isFormValid: false,
   ...beforeInitForm,

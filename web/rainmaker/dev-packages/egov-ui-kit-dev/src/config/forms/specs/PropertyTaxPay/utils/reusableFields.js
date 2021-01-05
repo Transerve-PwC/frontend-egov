@@ -765,6 +765,7 @@ export const constructionYear = {
     errorMessage: "PT_PROPERTY_DETAILS_CONSTRUCTION_YEAR_ERRORMSG",
     errorStyle: { position: "absolute", bottom: -8, zIndex: 5 },
     maxLength: 64,
+    required: true,
     pattern: /^(18|19|2[0-9])\d{2}$/i
   }
 }
@@ -818,9 +819,9 @@ export const floorCategories = {
 const setConstructionTypeDropdown = async (state, action, dispatch, formKey) => {
     const propertyType = get(state, "form.basicInformation.fields.typeOfBuilding.value");
     var usageCategoryMajor = get(state, "form.basicInformation.fields.typeOfUsage.value");
-    if(usageCategoryMajor === "RESIDENTIAL") {
-      set(action, "form.fields.floorCategories.hideField", true);
-    }
+    // if(usageCategoryMajor === "RESIDENTIAL") {
+    //   set(action, "form.fields.floorCategories.hideField", true);
+    // }
     let tenantId = get(state, 'form.propertyAddress.fields.city.value', null);
     tenantId = !!tenantId ? tenantId.split(".")[0] : tenantId
     const requestBody = {
