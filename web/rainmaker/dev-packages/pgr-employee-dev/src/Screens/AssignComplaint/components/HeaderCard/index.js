@@ -83,7 +83,7 @@ const HeaderCard = ({ complaint }) => {
                 />
               )}
               <Label
-                label={locality}
+                label={`${city.toUpperCase().replace(/[.]/g, "_")}_REVENUE_${mohalla.toUpperCase()}`}
                 className="status-result-color"
                 id="complaint-details-complaint-location"
                 labelStyle={{ color: "inherit" }}

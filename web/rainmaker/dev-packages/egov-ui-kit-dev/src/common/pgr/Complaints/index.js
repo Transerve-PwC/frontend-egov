@@ -248,7 +248,7 @@ const Complaints = ({ complaints, complaintLocation, role, onComplaintClick, noC
                       // }
                       fontSize={role === "citizen" ? 12 : 14}
                       label={complaint.status.status}
-                      dynamicArray={[Math.abs(complaint.SLA)]}
+                      secondaryText={[Math.abs(complaint.SLA)]}
                       bold={true}
                     />
                   </div>
@@ -285,7 +285,7 @@ const Complaints = ({ complaints, complaintLocation, role, onComplaintClick, noC
                         />
                       )}
                       <Label
-                        label={locality}
+                        label={`${city.toUpperCase().replace(/[.]/g, "_")}_REVENUE_${mohalla.toUpperCase()}`}
                         className="status-result-color"
                         id="complaint-details-complaint-location"
                         labelStyle={{ color: "inherit" }}

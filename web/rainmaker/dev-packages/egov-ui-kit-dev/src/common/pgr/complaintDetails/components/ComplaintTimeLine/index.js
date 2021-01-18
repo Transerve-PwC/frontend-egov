@@ -483,7 +483,7 @@ const DueDate = ({ duedateText }) => {
         labelStyle={duedateText.slaStatement.toLowerCase().includes("overdue") ? { color: "#e74c3c" } : { color: "#22b25f" }}
         className="Complaint-details-duedate"
         label={duedateText.slaStatement}
-        dynamicArray={[Math.abs(duedateText.daysCount)]}
+        secondaryText={[Math.abs(duedateText.daysCount)]}
       />
     )
   );
