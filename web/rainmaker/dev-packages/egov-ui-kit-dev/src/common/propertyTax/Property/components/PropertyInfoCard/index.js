@@ -1,15 +1,60 @@
 import React, { Component } from "react";
 import { Card } from "components";
 import Label from "egov-ui-kit/utils/translationNode";
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import { getQueryArg } from "egov-ui-framework/ui-utils/commons";
 import OldValueLabelContainer from "../../../../../common/common/OldValueLabelContainer";
 import "./index.css";
+import { httpRequest } from "egov-ui-kit/utils/api";
+import { MDMS } from "egov-ui-kit/utils/endPoints";
 
 class PropertyInfoCard extends Component {
-  render() {
-    const { ownerInfo, header, editIcon, backgroundColor = "rgb(242, 242, 242)", items = [], subSection = [], hideSubsectionLabel = false } = this.props;
 
+    state = {}
+
+    componentDidMount() {
+      !!this.props.map && !!this.props.tenantId && this.getMapDetails()
+    }
+
+    componentDidUpdate(prevProps) {
+      if(this.props.tenantId !== prevProps.tenantId && !!this.props.map) {
+        this.getMapDetails()
+      }
+    }
+
+    getMapDetails = async () => {
+      const requestBody = {
+        MdmsCriteria: {
+          tenantId: this.props.tenantId,
+          moduleDetails: [
+            {
+              moduleName: "boundary-location",
+              masterDetails: [{name: "mapDetails"}]
+            }
+          ]
+        }
+      }
+      try {
+        const payload = await httpRequest(MDMS.GET.URL, MDMS.GET.ACTION, [], requestBody);
+        const data = payload.MdmsRes["boundary-location"] || {};
+        let {mapDetails = []} = data;
+        this.setState({
+          mapDetails: mapDetails[0]
+        })
+      } catch (error) {
+        console.log("=====error", error)
+      }
+    }
+
+  render() {
+    const { ownerInfo, header, editIcon, backgroundColor = "rgb(242, 242, 242)", items = [], subSection = [], hideSubsectionLabel = false, map = false, geoLocation } = this.props;
+    let position = [0, 0];
+    let showError = false
     const isModify = getQueryArg(window.location.href, "mode") == 'WORKFLOWEDIT';
+    if(!!map && !!this.state.mapDetails) {
+      showError = !geoLocation.latitude && !geoLocation.longitude
+      position = !!geoLocation.latitude || !!geoLocation.longitude ? [geoLocation.latitude, geoLocation.longitude] : [this.state.mapDetails.nagarNigamLat, this.state.mapDetails.nagarNigamLng]
+    }
     return (
       <div>
         {items && (
@@ -57,6 +102,24 @@ class PropertyInfoCard extends Component {
                       );
                     }
                   })}
+                  {!!map && !!this.state.mapDetails && (
+                    <div className="col-sm-3 col-xs-12">
+                      {!!showError && (<div style={{color: "red"}}>
+                      Location not Found
+                      </div>)}
+                    <Map className="col-sm-12 col-xs-12 map-container" center={position} zoom={13} scrollWheelZoom={false}>
+                    <TileLayer
+                      // attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                      url={this.state.mapDetails.mapurl}
+                    />
+                    <Marker position={position}>
+                      {/* <Popup>
+                        A pretty CSS3 popup. <br /> Easily customizable.
+                      </Popup> */}
+                    </Marker>
+                  </Map>
+                  </div>
+                  )}
                 </div>
                 {subSection && (
                   <div>

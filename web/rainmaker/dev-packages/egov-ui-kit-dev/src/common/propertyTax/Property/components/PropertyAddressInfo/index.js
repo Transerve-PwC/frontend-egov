@@ -77,13 +77,15 @@ export const getAddressItems = (properties, OldProperty) => {
 const PropertyAddressInfo = ({ properties, editIcon, OldProperty }) => {
 
   let addressItems = [];
+  let geoLocation = {latitude: 0, longitude: 0}
   const header = 'PT_PROPERTY_ADDRESS_SUB_HEADER';
   if (properties) {
     addressItems = getAddressItems(properties, OldProperty);
+    geoLocation = !!properties.address ? properties.address.geoLocation : geoLocation
   }
 
   return (
-    <PropertyInfoCard editIcon={editIcon} items={addressItems} header={header}></PropertyInfoCard>
+    <PropertyInfoCard editIcon={editIcon} items={addressItems} header={header} map={true} geoLocation={geoLocation} tenantId={properties.tenantId}></PropertyInfoCard>
   );
 };
 

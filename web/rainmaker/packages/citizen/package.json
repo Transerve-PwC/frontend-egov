@@ -59,7 +59,9 @@
     "redux-thunk": "^2.2.0",
     "url-search-params-polyfill": "^3.0.0",
     "uuid": "3.3.3",
-    "webfontloader": "^1.6.28"
+    "webfontloader": "^1.6.28",
+    "leaflet": "^1.7.1",
+    "react-leaflet": "2.2.0"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
