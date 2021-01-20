@@ -103,9 +103,9 @@ class PropertyInfoCard extends Component {
                     }
                   })}
                   {!!map && !!this.state.mapDetails && (
-                    <div className="col-sm-3 col-xs-12">
+                    <div className="col-sm-6 col-xs-12">
                       {!!showError && (<div style={{color: "red"}}>
-                      Location not Found
+                      No location found
                       </div>)}
                     <Map className="col-sm-12 col-xs-12 map-container" center={position} zoom={13} scrollWheelZoom={false}>
                     <TileLayer
