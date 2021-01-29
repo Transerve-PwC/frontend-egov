@@ -81,7 +81,7 @@ const PropertyAddressInfo = ({ properties, editIcon, OldProperty }) => {
   const header = 'PT_PROPERTY_ADDRESS_SUB_HEADER';
   if (properties) {
     addressItems = getAddressItems(properties, OldProperty);
-    geoLocation = !!properties.address ? properties.address.geoLocation : geoLocation
+    geoLocation = !!properties.address && !!properties.address.geoLocation ? properties.address.geoLocation : geoLocation
   }
 
   return (
