@@ -50,7 +50,7 @@ export const generatePTAcknowledgment = (property, generalMDMSDataById, UlbLogoF
     const addressCard = getAddressItems(property);
     const ownerCard = getMultipleItemCard(ownerInfo, 'PT_OWNER');
     const assessmentCard = getAssessmentInfo(getFromObject(property, 'propertyDetails[0]', {}), generalMDMSDataById,property);
-    const documentCard = getDocumentsCard(property.documentsUploaded);
+    const documentCard = getDocumentsCard(!!property.documentsUploaded ? property.documentsUploaded : []);
 
     let pdfData = {
         header: "PT_ACKNOWLEDGEMENT", tenantId: property.tenantId,
